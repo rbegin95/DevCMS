@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers\Housekeeping;
+
+use App\Http\Controllers\Controller;
+use App\Models\News;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
+class CreateArticlesController extends Controller
+{
+    public function create()
+    {
+        $images = File::files(public_path('img/webpromo'));
+        $username = Auth::guard('housekeeping')->user()->username;
+        return view('housekeeping.articles.create', compact('images', 'username'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'required|string',
+            'desc' => 'required|string',
+            'published_by' => 'required|string',
+        ]);
+
+        // Debugging statement
+        if (!Auth::check()) {
+            return redirect()->route('housekeeping.login')->with('error', 'You must be logged in to create an article.');
+        }
+
+        $userId = Auth::id();
+        if (is_null($userId)) {
+            return redirect()->route('housekeeping.login')->with('error', 'Failed to retrieve authenticated user.');
+        }
+
+        News::create([
+            'user_id' => $userId,
+            'title' => $request->title,
+            'content' => $request->content,
+            'img' => 'img/webpromo/' . $request->image,
+            'desc' => $request->desc,
+            'published_by' => $request->published_by,
+        ]);
+
+        return redirect()->route('housekeeping.articles.create')
+                         ->with('success', 'News article created successfully.');
+    }
+
+    public function index()
+    {
+        $news = News::all();
+        return view('housekeeping.articles.index', compact('news'));
+    }
+
+    public function show($id)
+    {
+        $news = News::findOrFail($id);
+        return view('housekeeping.articles.show', compact('news'));
+    }
+}

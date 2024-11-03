@@ -1,0 +1,62 @@
+<footer class="position-relative mt-5">
+        <div id="footer" class="py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12 d-lg-block d-none">
+                        <h4 class="mb-3">Online Users</h4>
+                        
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <h4 class="mb-3">Help</h4>
+                        <ul class="links">
+                            <li class="mb-1">
+                                <a href="https://www.habboon.pw/help" aria-label="Help">
+                                    <i class="fas fa-question" style="left: -5px;margin-top: 2px;"></i>
+                                     Help
+                                </a>
+                            </li>
+                            <li class="mb-1">
+                                <a href="https://www.habboon.pw/help/tickets" aria-label="Tickets">
+                                    <i class="fas fa-ticket-alt" style="left: -6px;margin-top: 2px;"></i>
+                                     Tickets
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <h4 class="mb-3">Social</h4>
+                        <ul class="social">
+                            <li>
+                                <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+                                    <i class="fab fa-facebook-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" rel="noopener" aria-label="Twitter">
+                                    <i class="fab fa-twitter-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" rel="noopener" aria-label="Snapchat">
+                                    <i class="fab fa-snapchat-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+                                    <i class="fab fa-discord"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="legal-footer">
+            <p>{{ config('app.name')}} is a not for profit educational project.</p>
+        </div>
+    </footer>

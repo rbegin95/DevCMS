@@ -115,13 +115,18 @@
                         </a>
                     </li>
                     <li>
-                <a href="#" class="nav-link">
-                     Chatlogs
+                <a href="{{ route('housekeeping.hotel.roomchatlogs') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.roomchatlogs') ? 'active' : '' }}">
+                     Room Chatlogs
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('housekeeping.hotel.privatechatlogs') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.privatechatlogs') ? 'active' : '' }}">
+                     Private Chatlogs
                 </a>
             </li>
                      <li>
-                <a href="{{ route('housekeeping.hotel.alert') }}" class="nav-link">
-                            Hotel Alert
+                <a href="{{ route('housekeeping.hotel.alert') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.alert') ? 'active' : '' }}">
+                     Hotel Alert
                 </a>
             </li>
                 </ul>

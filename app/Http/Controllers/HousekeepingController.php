@@ -23,28 +23,4 @@ class HousekeepingController extends Controller
         return redirect()->route('housekeeping.dashboard')->with('status', 'User banned successfully!');
     }
 
-    protected $rconService;
-
-    public function __construct(RconService $rconService)
-    {
-        $this->rconService = $rconService;
-    }
-
-    public function sendHotelAlert(Request $request)
-{
-
-    dd($request->all());
-    $alertMessage = $request->input('message');
-
-    if (is_null($alertMessage)) {
-        return response()->json(['success' => false, 'message' => 'Message is missing from the request.']);
-    }
-
-    try {
-        $response = $this->rconService->alertHotel($alertMessage);
-        return response()->json(['success' => true, 'message' => 'Hotel alert sent successfully.', 'response' => $response]);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'message' => 'Failed to send alert: ' . $e->getMessage()]);
-    }
-    }
 }

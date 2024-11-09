@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Housekeeping\CreateArticlesController;
 use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Housekeeping\UsersController;
+use App\Http\Controllers\Housekeeping\HotelAlertRCONController;
+use App\Http\Controllers\Housekeeping\RoomChatlogsController;
+use App\Http\Controllers\Housekeeping\PrivateChatlogsController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\HousekeepingAuthController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -82,6 +85,8 @@ Route::prefix('housekeeping')->group(function () {
     Route::middleware(['housekeeping.auth', 'rank:5'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('housekeeping.index');
 
+        /* Hotel Column */ 
+
         Route::get('users', [UsersController::class, 'index'])->name('housekeeping.users.index');
         Route::get('users/search', [UsersController::class, 'search'])->name('housekeeping.users.search');
         Route::get('users/clones/{user}', [UsersController::class, 'clones'])->name('housekeeping.users.clones');
@@ -89,13 +94,20 @@ Route::prefix('housekeeping')->group(function () {
         Route::put('users/{user}', [UsersController::class, 'update'])->name('housekeeping.users.update');
         Route::post('users/{user}/ban', [UsersController::class, 'banUser'])->name('housekeeping.banUser');
 
-        Route::post('/hotel/hotel-alert', [HousekeepingController::class, 'sendHotelAlert'])->name('housekeeping.hotel.alert');
-            
+        Route::get('/hotel/roomchatlogs', [RoomChatlogsController::class, 'getRoomChats'])->name('housekeeping.hotel.roomchatlogs');
+        Route::get('/roomchatlogs', [RoomChatlogsController::class, 'getRoomChats'])->name('housekeeping.roomchatlogs');
+
+        Route::get('/hotel/privatechatlogs', [PrivateChatlogsController::class, 'getPrivateChats'])->name('housekeeping.hotel.privatechatlogs');
+        Route::get('/privatechatlogs', [PrivateChatlogsController::class, 'getPrivateChats'])->name('housekeeping.privatechatlogs');
+
+        Route::get('/hotel/hotel-alert', [HotelAlertRCONController::class, 'show'])->name('housekeeping.hotel.alert');
+        Route::post('/hotel/hotel-alert', [HotelAlertRCONController::class, 'sendHotelAlert'])->name('hotel.alert.send');
+
+        /* Website Column */
+ 
         Route::get('/support-tickets', [SiteSupportController::class, 'index'])->name('housekeeping.support.siteticket');
         Route::get('/support-tickets/{id}', [SiteSupportController::class, 'show'])->name('housekeeping.support.show');
         Route::post('/support-tickets/handle', [SiteSupportController::class, 'handle'])->name('housekeeping.support.handle');
-
-
 
         Route::resource('articles', CreateArticlesController::class)->names([
             'index' => 'housekeeping.articles.index',

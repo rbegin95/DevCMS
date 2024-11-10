@@ -56,23 +56,31 @@
                     <div class="col-12">
                         <div class="camera-carousel owl-carousel">
                             
-     @foreach($photos as $photo)
-    <div class="item">
-        <img src="{{ $photo->url }}" class="img-fluid" alt="{{ $photo->username }}'s Photo" style="border-radius: 5px 5px 0 0;">
-        <div class="info blue">
-            <div class="row align-items-center">
-                <div class="col-4">
-                    <div class="me">
-                        <img src="https://imager.habboon.pw/?figure={{ $photo->look }}&direction=3&head_direction=3&gesture=sml&headonly=1" alt="{{ $photo->username }}">
+     @php $displayedPhotos = []; @endphp
+    @foreach($photos as $photo)
+        @if(!in_array($photo->url, $displayedPhotos))
+            <div class="item">
+                <img src="{{ asset($photo->url) }}" class="img-fluid" alt="{{ $photo->username }}'s Photo" style="border-radius: 5px 5px 0 0;">
+                <div class="info blue">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <div class="me">
+                                <img src="https://imager.habboon.pw/?figure={{ $photo->look }}&direction=3&head_direction=3&gesture=sml&headonly=1" alt="{{ $photo->username }}">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <p>
+                                <a href="#">{{ $photo->username }}</a>
+                                <br/>
+                                <span style="color: #fff;">{{ \Carbon\Carbon::parse($photo->timestamp)->format('d/m/y') }}</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-8">
-                    <p><a href="#">{{ $photo->username }}</a><br/><span style="color: #fff;">{{ \Carbon\Carbon::parse($photo->timestamp)->format('d/m/y') }}</span></p>
-                </div>
             </div>
-        </div>
-    </div>
-@endforeach
+            @php $displayedPhotos[] = $photo->url; @endphp
+        @endif
+    @endforeach
 
                         </div>
                     </div>

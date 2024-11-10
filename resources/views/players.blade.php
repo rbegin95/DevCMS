@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <main class="position-relative container justify-content-center py-4">
     <div class="row">
         <div class="col-lg-8 col-md-6 col-12">
@@ -9,6 +10,7 @@
                 <span class="float-right">{{ $onlineUsers->count() }} of {{ $totalUsers }} users</span>
             </h5>
             <div class="row">
+
                 @forelse ($onlineUsers as $user)
                     <div class="col-lg-4">
                         <div class="card" style="margin-bottom: 0.75rem;">

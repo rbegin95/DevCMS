@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
-    <title>{{ config('app.name') }} - Nitro Client</title>
+    <title>{{ config('app.name') }} - Client</title>
     
     <link rel="stylesheet" href="https://assets.habboon.pw/nitro/static/assets/index-ecc28c5a.css">
 
@@ -48,8 +48,8 @@
         'asset.url': 'http://localhost:8080/nitro-assets',
         'image.library.url': 'http://localhost:8080/swf/c_images/',
         'hof.furni.url': 'http://localhost:8080/swf/dcr/hof_furni/',
-        'camera.url': '//static.habboon.pw/camera/',
-        'thumbnails.url': '//static.habboon.pw/navigator-thumbnail/%thumbnail%.png',
+        'camera.url': '//localhost:8080/camera/',
+        'thumbnails.url': '//localhost:8080/navigator-thumbnail/%thumbnail%.png',
         'url.prefix': 'http://localhost:8080/',
         'sso.ticket': '{{ Auth::user()->auth_ticket }}', // Dynamically set SSO ticket
         'system.currency.types': [-1,0,5,103],
@@ -60,8 +60,8 @@
 </script>
 
 <!-- Nitro Script Modules -->
-<script type="module" crossorigin src="https://assets.habboon.pw/nitro/static/assets/index-79123188.js"></script>
-<link rel="modulepreload" crossorigin href="https://assets.habboon.pw/nitro/static/assets/vendor-da6e8cc3.js">
+<script type="module" crossorigin src="{{ url('/assets/js/index-79123188.js') }}"></script>
+<link rel="modulepreload" crossorigin href="{{ url('/assets/js/vendor-da6e8cc3.js') }}">
 
 <script>
     window.FlashExternalInterface = {};

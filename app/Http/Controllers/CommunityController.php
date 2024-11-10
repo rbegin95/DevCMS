@@ -17,6 +17,7 @@ class CommunityController extends Controller
     {
         $newsController = new NewsController();
         $badgeController = new BadgeController();
+        $cameraController = new CameraWebController();
 
         // Get the latest article from NewsController
         $articles = $newsController->getArticles();
@@ -24,7 +25,10 @@ class CommunityController extends Controller
         // Get the random badges from BadgeController
         $randomBadges = $badgeController->show();
 
-        return view('community', compact('articles', 'randomBadges'));
+        // Get Camera Web Photos
+        $photos = $cameraController->show();
+
+        return view('community', compact('articles', 'randomBadges', 'photos'));
     }
 
     public function GOTW()

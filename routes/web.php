@@ -12,6 +12,8 @@ use App\Http\Controllers\Housekeeping\UsersController;
 use App\Http\Controllers\Housekeeping\HotelAlertRCONController;
 use App\Http\Controllers\Housekeeping\RoomChatlogsController;
 use App\Http\Controllers\Housekeeping\PrivateChatlogsController;
+use App\Http\Controllers\Housekeeping\BannedUsersController;
+use App\Http\Controllers\Housekeeping\GiveBadgeController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\HousekeepingAuthController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -103,11 +105,19 @@ Route::prefix('housekeeping')->group(function () {
         Route::get('/hotel/hotel-alert', [HotelAlertRCONController::class, 'show'])->name('housekeeping.hotel.alert');
         Route::post('/hotel/hotel-alert', [HotelAlertRCONController::class, 'sendHotelAlert'])->name('hotel.alert.send');
 
+        Route::get('/hotel/badges', [GiveBadgeController::class, 'index'])->name('housekeeping.hotel.badges');
+        Route::post('/hotel/badges/give', [GiveBadgeController::class, 'giveBadge'])->name('housekeeping.hotel.givebadge');
+        Route::delete('/hotel/badges/{id}', [GiveBadgeController::class, 'destroy'])->name('housekeeping.hotel.badges.destroy');
+
         /* Website Column */
  
         Route::get('/support-tickets', [SiteSupportController::class, 'index'])->name('housekeeping.support.siteticket');
         Route::get('/support-tickets/{id}', [SiteSupportController::class, 'show'])->name('housekeeping.support.show');
         Route::post('/support-tickets/handle', [SiteSupportController::class, 'handle'])->name('housekeeping.support.handle');
+
+        Route::get('/users/bannedusers', [BannedUsersController::class, 'index'])->name('housekeeping.users.bannedusers');
+        Route::delete('/users/bannedusers/{id}', [BannedUsersController::class, 'destroy'])->name('housekeeping.users.bannedusers.destroy');
+
 
         Route::resource('articles', CreateArticlesController::class)->names([
             'index' => 'housekeeping.articles.index',

@@ -52,6 +52,14 @@ class RconService
         ]);
     }
 
+    public function takeBadge(User $user, string $badge)
+    {
+        return $this->sendPacket('takebadge', [
+            'user_id' => $user->id,
+            'badge' => $badge,
+        ]);
+    }
+
     public function setMotto(User $user, string $motto)
     {
         return $this->sendPacket('setmotto', [

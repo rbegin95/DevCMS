@@ -110,6 +110,20 @@
                 <ul class="collapse nav flex-column ms-3" id="hotelSubMenu">
                     
                     <li class="nav-item">
+                        <a href="{{ route('housekeeping.hotel.badges') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.badges') ? 'active' : '' }}">
+                            Badges
+                        </a>
+                    </li>
+                    <li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('housekeeping.users.bannedusers') }}" class="nav-link {{ request()->routeIs('housekeeping.users.bannedusers') ? 'active' : '' }}">
+                            Bans
+                        </a>
+                    </li>
+                    <li>
+
+                    <li class="nav-item">
                         <a href="{{ route('housekeeping.users.index') }}" class="nav-link {{ request()->routeIs('housekeeping.users.index') ? 'active' : '' }}">
                             Users
                         </a>

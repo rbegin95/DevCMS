@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\Log;
 class HousekeepingAuthenticate
 {
     public function handle($request, Closure $next)
-    {
-        if (!Auth::guard('housekeeping')->check()) {
-            Log::warning('Housekeeping guard not authenticated.');
-            return redirect()->route('housekeeping.login');
-        }
+{
+    if (!Auth::guard('housekeeping')->check()) {
+        Log::warning('Housekeeping guard not authenticated.');
+        return redirect()->route('housekeeping.login');
+    }
 
-        Log::info('Housekeeping guard authenticated:', ['user' => Auth::guard('housekeeping')->user()]);
-        return $next($request);
+    // Set the housekeeping user as the default Auth context user
+    Auth::setUser(Auth::guard('housekeeping')->user());
+
+    Log::info('Housekeeping guard authenticated:', ['user' => Auth::user()]);
+    return $next($request);
     }
 }

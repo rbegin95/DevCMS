@@ -117,6 +117,8 @@ class UsersController extends Controller
             'timestamp' => time(),
         ]);
 
+        logHousekeepingActivity("User: " . Auth::user()->username . " has banned: " . $user->username);
+
         Log::info('Ban created', ['ban' => $ban]);
     } catch (\Exception $e) {
         Log::error('Error creating ban', ['error' => $e->getMessage()]);

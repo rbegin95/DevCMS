@@ -49,6 +49,8 @@ class GiveBadgeController extends Controller
         'badge_code' => $request->input('badge_code'),
     ]);
 
+    logHousekeepingActivity("Gave badge code: {$request->input('badge_code')} to User: {$user->username}");
+
     //RCON Service
 
     $this->rconService->giveBadge($user, $request->input('badge_code'));
@@ -61,9 +63,10 @@ class GiveBadgeController extends Controller
     // Redirect or return success response
     return redirect()->back()->with('success', 'Badge assigned successfully!');
 }
+    
+
      // Function to delete a user's badge
-   
-public function destroy($id)
+    public function destroy($id)
 {
     // Retrieve the badge and user details before deleting
     $badge = DB::table('users_badges')->where('id', $id)->first();
@@ -86,6 +89,7 @@ public function destroy($id)
         // Delete the badge from the table
         DB::table('users_badges')->where('id', $id)->delete();
 
+        logHousekeepingActivity("User: " . Auth::user()->username . " has deleted a badge.");
         // Redirect with a success message
         return redirect()->back()->with('success', 'Badge removed successfully and user has been notified.');
     }

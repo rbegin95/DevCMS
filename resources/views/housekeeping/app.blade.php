@@ -44,13 +44,13 @@
         }
 
         /* Collapsible menu styles with transition */
-        #hotelSubMenu, #websiteSubMenu {
+        #hotelSubMenu, #websiteSubMenu, #adminSubMenu {
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.0s ease, visibility 0.0s ease;
         }
 
-        #hotelSubMenu.show, #websiteSubMenu.show {
+        #hotelSubMenu.show, #websiteSubMenu.show, #adminSubMenu.show {
             opacity: 1;
             visibility: visible;
         }
@@ -143,6 +143,11 @@
                      Hotel Alert
                 </a>
             </li>
+             <li>
+                <a href="{{ route('housekeeping.hotel.wordfilter') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.wordfilter') ? 'active' : '' }}">
+                     Word Filters
+                </a>
+            </li>
                 </ul>
             </li>
 
@@ -165,6 +170,11 @@
                             Website Article
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('housekeeping.camera.cameraweb') }}" class="nav-link {{ request()->routeIs('housekeeping.camera.cameraweb') ? 'active' : '' }}">
+                           Camera Web
+                        </a>
+                    </li>
                     <li>
                 <a href="#" class="nav-link">
                             Staff Applications
@@ -173,9 +183,24 @@
                 </ul>
             </li>
 
-            <!-- Other Menu Items -->
-            
-        </ul>
+            <!-- Admin Section -->
+            @if (Auth::check() && Auth::user()->rank >= 7)
+            <li class="nav-item">
+                <a href="#adminSubMenu" class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">
+                    <span>
+                        <i class="bi bi-person-badge"></i> Admin
+                    </span>
+                    <i class="bi bi-caret-right" id="adminCaret"></i>
+                </a>
+                <ul class="collapse nav flex-column ms-3" id="adminSubMenu">
+                    <li class="nav-item">
+                        <a href="{{ route('housekeeping.admin.activitylogs') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.activitylogs') ? 'active' : '' }}">
+                            Acitivity Logs
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endif
     </div>
 
     <!-- Content -->
@@ -194,6 +219,9 @@
             var websiteSubMenu = document.getElementById('websiteSubMenu');
             var websiteCaret = document.getElementById('websiteCaret');
     
+            var websiteSubMenu = document.getElementById('adminSubMenu');
+            var websiteCaret = document.getElementById('adminCaret');
+
             // Hotel Menu
             hotelSubMenu.addEventListener('show.bs.collapse', function () {
                 hotelCaret.classList.remove('bi-caret-right');

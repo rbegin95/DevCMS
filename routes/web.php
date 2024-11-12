@@ -14,6 +14,9 @@ use App\Http\Controllers\Housekeeping\RoomChatlogsController;
 use App\Http\Controllers\Housekeeping\PrivateChatlogsController;
 use App\Http\Controllers\Housekeeping\BannedUsersController;
 use App\Http\Controllers\Housekeeping\GiveBadgeController;
+use App\Http\Controllers\Housekeeping\WordfilterController;
+use App\Http\Controllers\Housekeeping\CameraWebController;
+use App\Http\Controllers\Housekeeping\HousekeepingActivityLogController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\HousekeepingAuthController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -84,7 +87,7 @@ Route::prefix('housekeeping')->group(function () {
     Route::post('login', [HousekeepingAuthController::class, 'login'])->name('housekeeping.login.submit');
     Route::post('logout', [HousekeepingAuthController::class, 'logout'])->name('housekeeping.logout');
 
-    Route::middleware(['housekeeping.auth', 'rank:5'])->group(function () {
+    Route::middleware(['auth:housekeeping', 'rank:5'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('housekeeping.index');
 
         /* Hotel Column */ 
@@ -109,6 +112,11 @@ Route::prefix('housekeeping')->group(function () {
         Route::post('/hotel/badges/give', [GiveBadgeController::class, 'giveBadge'])->name('housekeeping.hotel.givebadge');
         Route::delete('/hotel/badges/{id}', [GiveBadgeController::class, 'destroy'])->name('housekeeping.hotel.badges.destroy');
 
+        Route::get('/hotel/wordfilters', [WordFilterController::class, 'index'])->name('housekeeping.hotel.wordfilter');
+        Route::post('/wordfilter', [WordFilterController::class, 'store'])->name('housekeeping.hotel.wordfilter.store');
+        Route::delete('/wordfilter/{key}', [WordFilterController::class, 'destroy'])->name('housekeeping.hotel.wordfilter.destroy');
+
+
         /* Website Column */
  
         Route::get('/support-tickets', [SiteSupportController::class, 'index'])->name('housekeeping.support.siteticket');
@@ -117,6 +125,13 @@ Route::prefix('housekeeping')->group(function () {
 
         Route::get('/users/bannedusers', [BannedUsersController::class, 'index'])->name('housekeeping.users.bannedusers');
         Route::delete('/users/bannedusers/{id}', [BannedUsersController::class, 'destroy'])->name('housekeeping.users.bannedusers.destroy');
+
+        Route::get('/camera/cameraweb', [CameraWebController::class, 'index'])->name('housekeeping.camera.cameraweb');
+        Route::delete('/camera/{id}', [CameraWebController::class, 'destroy'])->name('housekeeping.camera.destroy');
+
+        /* Admin Section Rank 7 ONLY */
+
+        Route::get('/admin/activitylogs', [HousekeepingActivityLogController::class, 'index'])->name('housekeeping.admin.activitylogs');
 
 
         Route::resource('articles', CreateArticlesController::class)->names([

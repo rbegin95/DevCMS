@@ -34,6 +34,7 @@ class BannedUsersController extends Controller
         // Delete the ban record by ID
         DB::table('bans')->where('id', $id)->delete();
 
+        logHousekeepingActivity("User: " . Auth::user()->username . " has unbanned: " . $user->username);
         // Redirect back with a success message
         return redirect()->route('housekeeping.users.bannedusers')->with('success', 'User has been unbanned successfully.');
     }

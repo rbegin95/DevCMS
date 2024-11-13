@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BannedController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StaffApplicationController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\UserController;
@@ -17,6 +19,8 @@ use App\Http\Controllers\Housekeeping\GiveBadgeController;
 use App\Http\Controllers\Housekeeping\WordfilterController;
 use App\Http\Controllers\Housekeeping\CameraWebController;
 use App\Http\Controllers\Housekeeping\HousekeepingActivityLogController;
+use App\Http\Controllers\Housekeeping\HousekeepingSiteSettingsController;
+use App\Http\Controllers\Housekeeping\StaffApplicationsController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\HousekeepingAuthController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -39,6 +43,10 @@ Route::middleware([
 ])->group(function () {
     Route::get('/me', [NewsController::class, 'dashboard'])->name('dashboard');
 });
+
+Route::get('/staff-application', [StaffApplicationController::class, 'create'])->name('staff.application');
+Route::post('/staff-application', [StaffApplicationController::class, 'store'])->name('staff.application.submit');
+
 
 /* Nitro Client */
 Route::get('/client', NitroController::class)->name('nitro-client');
@@ -83,12 +91,30 @@ Route::post('help/tickets', [SupportController::class, 'store'])->name('tickets.
 /* HouseKeeping */
 
 Route::prefix('housekeeping')->group(function () {
+    // Main housekeeping entry point
+    Route::get('/', function () {
+        if (Auth::guard('housekeeping')->check()) {
+            // Redirect authenticated users to the dashboard
+            return redirect()->route('housekeeping.dashboard');
+        }
+
+        // Serve the login form if not authenticated, without changing the URL to /login
+        return app()->call('App\Http\Controllers\HousekeepingAuthController@showLoginForm');
+    })->name('housekeeping');
+
+    // Explicit GET route for /housekeeping/login
     Route::get('login', [HousekeepingAuthController::class, 'showLoginForm'])->name('housekeeping.login');
+
+    // POST route for handling login submissions
     Route::post('login', [HousekeepingAuthController::class, 'login'])->name('housekeeping.login.submit');
+
+    // POST route for handling logout
     Route::post('logout', [HousekeepingAuthController::class, 'logout'])->name('housekeeping.logout');
 
+
     Route::middleware(['auth:housekeeping', 'rank:5'])->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('housekeeping.index');
+        // Dashboard route with the name `housekeeping.dashboard`
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('housekeeping.dashboard');
 
         /* Hotel Column */ 
 
@@ -133,6 +159,13 @@ Route::prefix('housekeeping')->group(function () {
 
         Route::get('/admin/activitylogs', [HousekeepingActivityLogController::class, 'index'])->name('housekeeping.admin.activitylogs');
 
+        Route::get('/admin/sitesettings', [HousekeepingSiteSettingsController::class, 'index'])->name('housekeeping.admin.sitesettings');
+        Route::post('/admin/sitesettings', [HousekeepingSiteSettingsController::class, 'updateStaffApplicationTab'])
+        ->name('housekeeping.admin.sitesettings.stafftab');
+
+        Route::get('admin/staffapps', [StaffApplicationsController::class, 'index'])->name('housekeeping.admin.staffapps');
+        Route::post('admin/staffapps/promote', [StaffApplicationsController::class, 'promote'])->name('housekeeping.admin.staffapps.promote');
+        Route::delete('admin/staffapps/reject', [StaffApplicationsController::class, 'reject'])->name('housekeeping.admin.staffapps.reject');
 
         Route::resource('articles', CreateArticlesController::class)->names([
             'index' => 'housekeeping.articles.index',

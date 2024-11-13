@@ -10,7 +10,7 @@ class HousekeepingAuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('housekeeping.login');
+        return view('housekeeping.login'); // Ensure this view exists
     }
 
     public function login(Request $request)
@@ -20,7 +20,7 @@ class HousekeepingAuthController extends Controller
 
         if (Auth::guard('housekeeping')->attempt($credentials)) {
             Log::info('Login successful for user:', ['username' => $credentials['username']]);
-            return redirect()->route('housekeeping.index');
+            return redirect()->route('housekeeping.dashboard');
         }
 
         Log::warning('Login failed for user:', ['username' => $credentials['username']]);
@@ -35,6 +35,6 @@ class HousekeepingAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('housekeeping.login');
+        return redirect()->route('housekeeping');
     }
 }

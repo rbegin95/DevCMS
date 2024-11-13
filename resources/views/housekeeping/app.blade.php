@@ -94,7 +94,7 @@
 
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="{{ route('housekeeping.index') }}" class="nav-link {{ request()->routeIs('housekeeping.index') ? 'active' : '' }}">
+                <a href="{{ route('housekeeping.dashboard') }}" class="nav-link {{ request()->routeIs('housekeeping.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
             </li>
@@ -175,11 +175,6 @@
                            Camera Web
                         </a>
                     </li>
-                    <li>
-                <a href="#" class="nav-link">
-                            Staff Applications
-                </a>
-            </li>
                 </ul>
             </li>
 
@@ -198,6 +193,17 @@
                             Acitivity Logs
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('housekeeping.admin.sitesettings') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.sitesettings') ? 'active' : '' }}">
+                            Website Settings
+                        </a>
+                    </li>
+                     <li>
+                <a href="{{ route('housekeeping.admin.staffapps')}}" class="nav-link {{ request()->routeIs('housekeeping.admin.staffapps') ? 'active' : '' }}">
+                            Staff Applications
+                </a>
+            </li>
                 </ul>
             </li>
             @endif
@@ -209,6 +215,7 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -219,8 +226,8 @@
             var websiteSubMenu = document.getElementById('websiteSubMenu');
             var websiteCaret = document.getElementById('websiteCaret');
     
-            var websiteSubMenu = document.getElementById('adminSubMenu');
-            var websiteCaret = document.getElementById('adminCaret');
+            var adminSubMenu = document.getElementById('adminSubMenu');
+            var adminCaret = document.getElementById('adminCaret');
 
             // Hotel Menu
             hotelSubMenu.addEventListener('show.bs.collapse', function () {
@@ -242,6 +249,18 @@
             websiteSubMenu.addEventListener('hide.bs.collapse', function () {
                 websiteCaret.classList.remove('bi-caret-down');
                 websiteCaret.classList.add('bi-caret-right');
+            });
+
+            //Admin Menu
+
+            adminSubMenu.addEventListener('show.bs.collapse', function () {
+                adminCaret.classList.remove('bi-caret-right');
+                adminCaret.classList.add('bi-caret-down');
+            });
+
+            adminSubMenu.addEventListener('hide.bs.collapse', function () {
+                adminCaret.classList.remove('bi-caret-down');
+                adminCaret.classList.add('bi-caret-right');
             });
         });
     </script>

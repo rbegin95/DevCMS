@@ -47,7 +47,7 @@
 </head>
 <body>
     <main class="form-signin w-100 m-auto">
-        <form method="POST" action="{{ route('housekeeping.login') }}">
+        <form method="POST" action="{{ route('housekeeping.login.submit') }}">
     @csrf
     <h1 class="h3 mb-3 fw-normal text-white text-center">Housekeeping Sign-in</h1>
 

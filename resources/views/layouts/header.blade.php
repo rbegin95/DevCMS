@@ -68,6 +68,11 @@
                 <li class="nav-item">
                     <a href="{{ route('help') }}" class="nav-link {{ request()->routeIs('help') ? 'active' : '' }}">Help</a>
                 </li>
+                @if (App\Models\WebsiteSetting::getSetting('staff_application_tab_visible') == 'true')
+                <li class="nav-item d-md-none d-lg-block">
+                    <a href="{{ route('staff.application') }}" class="nav-link {{ request()->routeIs('staff.application') ? 'active' : '' }}" style="color: red;">Staff Application</a>
+                </li>
+                @endif
             </ul>
             @if (!View::hasSection('body-class') || trim(View::yieldContent('body-class')) !== 'registration-page')
                 <ul class="navbar-nav ml-lg-auto navbar-user-dropdown ml-2 ml-lg-0">

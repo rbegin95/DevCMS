@@ -12,34 +12,36 @@
         @foreach($applications as $application)
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold">{{ $application->username }}</h5>
-                    <p class="card-text"><strong>Reason:</strong> {{ $application->reason_for_joining }}</p>
-                    <p class="card-text"><strong>Discord Username:</strong> {{ $application->discord_username }}</p>
-                    <p class="card-text"><strong>Country:</strong> {{ $application->country }}</p>
-                    <p class="card-text"><strong>Age:</strong> {{ $application->age }}</p>
-                    <p class="card-text"><strong>New Ideas:</strong> {{ $application->new_ideas }}</p>
-                    <p class="card-text"><strong>Availability:</strong> {{ $application->availability_per_day }}</p>
-                    <p class="card-text"><strong>Additional Info:</strong> {{ $application->additional_info ?? 'N/A' }}</p>
-                    
-                    <!-- Promote Button with Modal Trigger -->
-                    <button class="btn btn-primary mt-3" data-bs-toggle="modal" 
-                        data-bs-target="#promoteModal" 
-                        data-user-id="{{ $application->user_id }}" 
-                        data-username="{{ $application->username }}">
-                        Promote
-                    </button>
+    <div class="card-body">
+        <h5 class="card-title font-weight-bold">{{ $application->username }}</h5>
+        <p class="card-text"><strong>Reason:</strong> {{ $application->reason_for_joining }}</p>
+        <p class="card-text"><strong>Discord Username:</strong> {{ $application->discord_username }}</p>
+        <p class="card-text"><strong>Country:</strong> {{ $application->country }}</p>
+        <p class="card-text"><strong>Age:</strong> {{ $application->age }}</p>
+        <p class="card-text"><strong>New Ideas:</strong> {{ $application->new_ideas }}</p>
+        <p class="card-text"><strong>Availability:</strong> {{ $application->availability_per_day }}</p>
+        <p class="card-text"><strong>Additional Info:</strong> {{ $application->additional_info ?? 'N/A' }}</p>
+        
+        <!-- Button Group -->
+        <div class="d-flex justify-content-between">
+            <!-- Promote Button -->
+            <button class="btn btn-primary" data-bs-toggle="modal" 
+                data-bs-target="#promoteModal" 
+                data-user-id="{{ $application->user_id }}" 
+                data-username="{{ $application->username }}">
+                Promote
+            </button>
 
-                    <!-- Reject Form (Direct Submission) -->
-                    <form action="{{ route('housekeeping.admin.staffapps.reject') }}" method="POST" class="mt-2">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="application_id" value="{{ $application->id }}">
-                        <button type="submit" class="btn btn-danger btn-block">Reject</button>
-                    </form>
-                </div>
-            </div>
+            <!-- Reject Form -->
+            <form action="{{ route('housekeeping.admin.staffapps.reject') }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="application_id" value="{{ $application->id }}">
+                <button type="submit" class="btn btn-danger">Reject</button>
+            </form>
         </div>
+    </div>
+</div>
         @endforeach
     </div>
 </div>

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Account\UserSettings;
 
 class User extends Authenticatable
 {
@@ -68,14 +68,19 @@ class User extends Authenticatable
         'machine_id',
     ];
 
-      public function permissions(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /**
+     * Define the relationship with the permissions table.
+     */
+    public function permissions(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Permission::class, 'rank');
     }
 
+    /**
+     * Generate SSO ticket for the user.
+     */
     public function ssoTicket(): string
     {
-        
         Log::info('Generating SSO ticket');
         // Generate the SSO ticket by combining the hotel name from .env and a unique UUID
         $sso = sprintf('%s-%s', Str::replace(' ', '', env('HOTEL_NAME')), Str::uuid());
@@ -93,10 +98,22 @@ class User extends Authenticatable
         return $sso;
     }
 
+    /**
+     * Check if the user is banned.
+     */
     public function isBanned()
     {
-    return Ban::where('user_id', $this->id)->exists();
+        return Ban::where('user_id', $this->id)->exists();
     }
+
+    /**
+     * Relationship with the users_settings table.
+     */
+    public function settings()
+    {
+        return $this->hasOne(UserSettings::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -109,5 +126,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
 }

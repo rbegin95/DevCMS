@@ -1,4 +1,4 @@
-<x-guest-layout>
+@extends('layouts.app')
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />

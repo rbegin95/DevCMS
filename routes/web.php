@@ -8,6 +8,7 @@ use App\Http\Controllers\StaffApplicationController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Account\AccountSettingsController;
 use App\Http\Controllers\Housekeeping\CreateArticlesController;
 use App\Http\Controllers\Housekeeping\DashboardController;
 use App\Http\Controllers\Housekeeping\UsersController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Housekeeping\CameraWebController;
 use App\Http\Controllers\Housekeeping\HousekeepingActivityLogController;
 use App\Http\Controllers\Housekeeping\HousekeepingSiteSettingsController;
 use App\Http\Controllers\Housekeeping\StaffApplicationsController;
+use App\Http\Controllers\Housekeeping\PasswordRestoreController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\HousekeepingAuthController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -47,10 +49,22 @@ Route::middleware([
 Route::get('/staff-application', [StaffApplicationController::class, 'create'])->name('staff.application');
 Route::post('/staff-application', [StaffApplicationController::class, 'store'])->name('staff.application.submit');
 
+/* Account Settings */
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account/', [AccountSettingsController::class, 'showPreferences'])->name('account.account');
+    Route::post('/account/', [AccountSettingsController::class, 'updatePreferences'])->name('account.account.update');
+
+    Route::get('/account/email', [AccountSettingsController::class, 'showEmailForm'])->name('account.email');
+    Route::post('/account/email', [AccountSettingsController::class, 'updateEmail'])->name('account.email.update');
+
+    Route::get('/account/password', [AccountSettingsController::class, 'showUpdatePassword'])->name('account.password');
+Route::post('/account/password', [AccountSettingsController::class, 'updatePassword'])->name('account.password.update');
+
+});
 
 /* Nitro Client */
 Route::get('/client', NitroController::class)->name('nitro-client');
-
 
 /* Community Pages */
 Route::get('/community', [CommunityController::class, 'index'])->name('community');
@@ -166,6 +180,9 @@ Route::prefix('housekeeping')->group(function () {
         Route::get('admin/staffapps', [StaffApplicationsController::class, 'index'])->name('housekeeping.admin.staffapps');
         Route::post('admin/staffapps/promote', [StaffApplicationsController::class, 'promote'])->name('housekeeping.admin.staffapps.promote');
         Route::delete('admin/staffapps/reject', [StaffApplicationsController::class, 'reject'])->name('housekeeping.admin.staffapps.reject');
+
+        Route::get('/password-restore', [PasswordRestoreController::class, 'showRestoreForm'])->name('housekeeping.admin.passwordrestore');
+        Route::post('/password-restore', [PasswordRestoreController::class, 'restore'])->name('housekeeping.admin.passwordrestore.post');
 
         Route::resource('articles', CreateArticlesController::class)->names([
             'index' => 'housekeeping.articles.index',

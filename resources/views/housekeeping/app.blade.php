@@ -204,6 +204,11 @@
                             Staff Applications
                 </a>
             </li>
+            <li>
+                <a href="{{ route('housekeeping.admin.passwordrestore') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.passwordrestore') ? 'active' : '' }}">
+        Password Restore Tool
+                    </a>
+                    </li>
                 </ul>
             </li>
             @endif

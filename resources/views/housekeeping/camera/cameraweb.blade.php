@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2>Uploaded Images</h2>
+    <h2>Published Images</h2>
 
     <div class="row">
         @foreach ($images as $image)

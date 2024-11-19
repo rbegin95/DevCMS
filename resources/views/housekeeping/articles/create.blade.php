@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="published_by">Published By</label>
-            <input type="text" id="published_by" name="published_by" class="form-control" value="{{ $username }}" disabled>
+            <input type="text" id="published_by" name="published_by" class="form-control" value="{{ $username }}" readonly>
         </div>
         <div class="form-group">
             <label for="image">Image</label>

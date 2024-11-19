@@ -69,7 +69,7 @@ Route::get('/client', NitroController::class)->name('nitro-client');
 /* Community Pages */
 Route::get('/community', [CommunityController::class, 'index'])->name('community');
 Route::get('/articles', [NewsController::class, 'AllArticles'])->name('AllArticles');
-Route::get('/articles/{id}-{name?}', [NewsController::class, 'GetRecents'])->name('articles.show');
+Route::get('/articles/{id}-{name}', [NewsController::class, 'GetRecents'])->name('articles.show');
 Route::post('/comments', [NewsController::class, 'storeComment'])->name('comments.store');
 Route::get('/community/gotw', [CommunityController::class, 'GOTW'])->name('gotw');
 Route::get('/community/leaderboards', [CommunityController::class, 'MostStuff'])->name('leaderboards');
@@ -185,13 +185,12 @@ Route::prefix('housekeeping')->group(function () {
         Route::post('/password-restore', [PasswordRestoreController::class, 'restore'])->name('housekeeping.admin.passwordrestore.post');
 
         Route::resource('articles', CreateArticlesController::class)->names([
-            'index' => 'housekeeping.articles.index',
             'create' => 'housekeeping.articles.create',
             'store' => 'housekeeping.articles.store',
             'show' => 'housekeeping.articles.show',
-            'edit' => 'housekeeping.articles.edit',
-            'update' => 'housekeeping.articles.update',
-            'destroy' => 'housekeeping.articles.destroy',
+            //'edit' => 'housekeeping.articles.edit',
+            //'update' => 'housekeeping.articles.update',
+            //'destroy' => 'housekeeping.articles.destroy',
         ]);
     });
 });

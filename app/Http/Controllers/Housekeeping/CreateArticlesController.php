@@ -18,37 +18,46 @@ class CreateArticlesController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'image' => 'required|string',
-            'desc' => 'required|string',
-            'published_by' => 'required|string',
-        ]);
+{
+    // Log incoming request
+    \Log::info('Incoming Request:', $request->all());
 
-        // Debugging statement
-        if (!Auth::check()) {
-            return redirect()->route('housekeeping.login')->with('error', 'You must be logged in to create an article.');
-        }
+    $request->validate([
+        'title' => 'required|string',
+        'content' => 'required|string',
+        'image' => 'required|string',
+        'desc' => 'required|string',
+        'published_by' => 'required|string',
+    ]);
 
-        $userId = Auth::id();
-        if (is_null($userId)) {
-            return redirect()->route('housekeeping.login')->with('error', 'Failed to retrieve authenticated user.');
-        }
+    // Log validation success
+    \Log::info('Validation passed.');
 
-        News::create([
-            'user_id' => $userId,
-            'title' => $request->title,
-            'content' => $request->content,
-            'img' => 'img/webpromo/' . $request->image,
-            'desc' => $request->desc,
-            'published_by' => $request->published_by,
-        ]);
+    // Retrieve authenticated user ID
+    $userId = Auth::id();
+    \Log::info('Authenticated User ID:', ['user_id' => $userId]);
 
-        return redirect()->route('housekeeping.articles.create')
-                         ->with('success', 'News article created successfully.');
+    if (is_null($userId)) {
+        return redirect()->route('housekeeping.login')->with('error', 'Failed to retrieve authenticated user.');
     }
+
+    // Attempt to store the data
+    $article = News::create([
+        'user_id' => $userId,
+        'title' => $request->title,
+        'content' => $request->content,
+        'img' => 'img/webpromo/' . $request->image,
+        'desc' => $request->desc,
+        'published_by' => $request->published_by,
+    ]);
+
+    \Log::info('Article stored:', $article->toArray());
+
+    return redirect()->route('housekeeping.articles.create')
+        ->with('success', 'News article created successfully.');
+}
+
+
 
     public function index()
     {

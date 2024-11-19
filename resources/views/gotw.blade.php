@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ config('app.name') }} - GOTW Leaderboard
+@endsection
+
 @section('content')
     <main class="position-relative container justify-content-center py-4">
     <div class="row">

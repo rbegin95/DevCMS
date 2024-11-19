@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ config('app.name') }} - Staff
+    {{ config('app.name') }} - Articles
 @endsection
 
 @section('content')

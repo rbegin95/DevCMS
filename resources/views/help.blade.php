@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="silver">{{ config('app.name') }} Way</h5>
-                        <img src="https://www.habboon.pw/img/help/safetytips1_n.png" alt class="float-right" loading="lazy">
+                        <img src="{{ asset('img/help/safetytips1_n.png') }}" alt class="float-right" loading="lazy">
                         <p>Welcome to the {{ config('app.name') }} Hotel, where fun and excitement are always around the corner! 🎉 To ensure that everyone has the best experience possible, we've created The {{ config('app.name') }} Way - our special set of rules that keeps our community safe and friendly. 🌈</p>
                         <p>It's important to know that these rules and regulations can change without notice. As a member of our awesome {{ config('app.name') }} community, you agree to follow these terms and conditions. 😊 If you don't, there may be sanctions applied to your account.</p>
                         <p>But don't worry! If you have any questions or concerns about The {{ config('app.name') }} Way, our friendly Hotel Staff are always here to help. 💬 Now, go ahead and click the button below to read The {{ config('app.name') }} Way and join us in creating a fantastic environment for all! 🚀</p>
@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="silver">Ban Appeals</h5>
-                        <img src="https://www.habboon.pw/img/help/safetytips5_n.png" class="float-right" alt loading="lazy">
+                        <img src="{{ asset('img/help/safetytips5_n.png') }}" class="float-right" alt loading="lazy">
                         <p> If you think you've been unfairly banned from our super cool hotel, no worries - we're here to help! 🌟 All you need to do is submit a ticket 🎟️ and let us know what happened.</p>
                         <p class="mb-0">We'll check it out and give you a fair chance to return to the awesome world of {{ config('app.name') }}! 🕺💃 So go ahead, share your side of the story, and let's get you back in on the fun! 😄</p>
                         <div class="mt-3">
@@ -36,7 +36,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="silver">Password Recovery</h5>
-                        <img src="https://www.habboon.pw/img/help/habboway_5a.png" class="float-right" alt loading="lazy">
+                        <img src="{{ asset('img/help/habboway_5a.png') }}" class="float-right" alt loading="lazy">
                         <p>Forgotten your password and been locked out of your account? 🤔 No need to worry, we've got a solution for you! 🎉 If you can't remember your password, you can submit a ticket to request a password change. To do this, simply provide us with the following information:</p>
                         <ul>
                             <li>Username (leave blank if forgotten):</li>
@@ -55,7 +55,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="silver">VPN Whitelisting</h5>
-                        <img src="https://www.habboon.pw/img/help/habboway_2b.png" class="float-right" alt loading="lazy">
+                        <img src="{{ asset('img/help/habboway_2b.png') }}" class="float-right" alt loading="lazy">
                         <p>We know that sometimes you might need to use a VPN or proxy connection while visiting our fantastic hotel! 🏨 But since we want to keep our community safe and free from toxicity, we block these connections by default. 🛡️</p>
                         <p>However, we understand that there are exceptions, and we're here to help! 🌟 If you find yourself in one of these situations, you can request VPN whitelisting:</p>
                         <ol>
@@ -73,7 +73,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="silver">Scam Reports</h5>
-                        <img src="https://www.habboon.pw/img/help/safetytips7_n.png" class="float-right" alt loading="lazy">
+                        <img src="{{ asset('img/help/safetytips7_n.png') }}" class="float-right" alt loading="lazy">
                         <p>Hey {{ config('app.name') }} buddies! 🎉 We know that sometimes, unfortunately, users might try to scam others out of their coins, diamonds, or furniture. 😢 But don't worry, we've got your back! We don't tolerate this kind of behavior, and we're here to help you report it. 🌟</p>
                         <p>Have you been scammed? 😨</p>
                         <p>If so, we're here to assist! Just follow the template below and include it in a ticket under the 'Scam Reports' option:</p>
@@ -85,14 +85,14 @@
                         </ul>
                         <p class="mb-0">Remember, it's important to be honest and true to yourself! 🌈 Nobody likes a trickster, and stealing won't make you rich - it makes you a criminal. 😔 By reporting scams, we can work together to keep the {{ config('app.name') }} Hotel a fun, safe, and amazing place for everyone! 🎊</p>
                         <div class="mt-3">
-                            <a href="https://www.habboon.pw/help/tickets/create" class="btn btn-primary">Submit a scam report &raquo;</a>
+                            <a href="/help/tickets/create" class="btn btn-primary">Submit a scam report &raquo;</a>
                         </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="silver">Room Ads</h5>
-                        <img src="https://www.habboon.pw/img/help/safetytips6_n.png" alt class="float-right" loading="lazy">
+                        <img src="{{asset('img/help/safetytips6_n.png') }}" alt class="float-right" loading="lazy">
                         <p>Hey there, {{ config('app.name') }} friends! 🌟 Did you know that you can make your room even cooler by displaying images in it? 😮 That's right! With room background furniture, you can embed images directly into your room on the hotel! 🖼️</p>
                         <p>However, by default, you won't have the furniture access or permission to do this. But no worries, you can apply for it! 🎉 All you need to do is submit a ticket and let us know why you'd like to have these awesome room ad rights. 📝</p>
                         <p class="mb-0">Once you've got the permission, you'll be able to customize your room and make it truly one-of-a-kind! 🌈 So go ahead and tell us why you need those rights, and let's take your room to the next level together! 🚀</p>

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ config('app.name') }} - Me
+@endsection
+
 @section('content')
     <main class="position-relative container justify-content-center py-4">
     <div class="row">
@@ -46,7 +50,7 @@
                 <div class="carousel-inner">
                     @foreach ($articles as $key => $article)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <a href="{{ route('articles.show', ['id' => $article->id, 'name' => \Illuminate\Support\Str::slug($article->name)]) }}">
+                        <a href="{{ route('articles.show', ['id' => $article->id, 'name' => \Illuminate\Support\Str::slug($article->title)]) }}">
                         <img class="d-block w-100" style="background-image: url('{{ asset('/' . $article->img) }}')">
                     </a>
                         <div class="carousel-caption d-none d-md-block">

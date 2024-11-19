@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ config('app.name') }} - Banned
+@endsection
+
 @section('content')
 <br /><br />
 <main class="main-container">

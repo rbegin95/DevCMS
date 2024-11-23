@@ -22,8 +22,9 @@ class RoomChatlogsController extends Controller
                              ->orWhere('chatlogs_room.room_id', 'like', '%' . $search . '%');
             })
             ->orderBy('chatlogs_room.timestamp', 'desc')
-            ->get();
+            ->paginate(20);
 
+            logHousekeepingActivity("User: " . auth()->user()->username . " has viewed roomchatlogs chatlogs");
         // Pass the data and search term to the view
         return view('housekeeping.hotel.roomchatlogs', ['chatLogs' => $chatLogs, 'search' => $search]);
     }

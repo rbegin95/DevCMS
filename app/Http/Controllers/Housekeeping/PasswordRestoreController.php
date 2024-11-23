@@ -55,6 +55,7 @@ class PasswordRestoreController extends Controller
                 ->subject($request->subject);
         });
 
+        logHousekeepingActivity("User: " . auth()->user()->username . " has restored the account for User: " . $user->username . " (User ID: " . $user->id . ")");
         return redirect()->back()->with('temp_password', $tempPassword);
     }
 }

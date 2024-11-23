@@ -22,7 +22,7 @@ class GiveBadgeController extends Controller
          $assignedBadges = DB::table('users_badges')
         ->join('users', 'users_badges.user_id', '=', 'users.id')
         ->select('users_badges.id', 'users.username', 'users_badges.badge_code')
-        ->get();
+        ->paginate(20);
 
         return view('housekeeping.hotel.badges', compact('assignedBadges'));
     }

@@ -5,10 +5,10 @@
 @section('content')
 <br />
 @if(session('success'))
-        <div class="alert alert-success" style="width: 50%; margin: 0 auto; text-align: center;">
-            {{ session('success') }}
-        </div>
-    @endif
+    <div class="alert alert-success" style="width: 50%; margin: 0 auto; text-align: center;">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div class="container">
     <h1><center>Create News Article</center></h1>
@@ -20,9 +20,9 @@
         </div>
         <div class="form-group">
             <label for="desc">Description</label>
-            <input id="desc" name="desc" class="form-control"></input>
+            <input id="desc" name="desc" class="form-control">
         </div>
-       <div class="mb-3">
+        <div class="mb-3">
             <label for="content" class="form-label">Content</label>
             <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
         </div>
@@ -44,23 +44,25 @@
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>
+@endsection
 
+@section('scripts')
 <script>
-document.getElementById('image').addEventListener('change', function(event) {
-    const selectedImage = event.target.value;
-    const img = document.getElementById('image-preview');
-    if (selectedImage) {
-        img.src = `/img/webpromo/${selectedImage}`;
-        img.style.display = 'block';
-    } else {
-        img.style.display = 'none';
-    }
-});
-
-$(document).ready(function() {
-    $('#content').summernote({
-        height: 300
+    $(document).ready(function() {
+        $('#content').summernote({
+            height: 300
+        });
     });
-});
+
+    document.getElementById('image').addEventListener('change', function(event) {
+        const selectedImage = event.target.value;
+        const img = document.getElementById('image-preview');
+        if (selectedImage) {
+            img.src = `/img/webpromo/${selectedImage}`;
+            img.style.display = 'block';
+        } else {
+            img.style.display = 'none';
+        }
+    });
 </script>
 @endsection

@@ -28,7 +28,7 @@
                 <div class="d-flex align-items-center">
                     <div class="flex-grow-1">
                         <h7 class="text-muted fw-normal mt-0 text-truncate" title="Users Online">Users Online</h7>
-                        <h3 class="my-2 py-1">{{ $onlineUsers }}</h3>
+                        <h3 class="my-2 py-1">{{ $onlineUsers->count() }}</h3>
                     </div>
                     <div class="flex-shrink-0">
                         <i class="fas fa-user-check fa-2x text-success"></i>

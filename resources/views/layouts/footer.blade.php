@@ -4,7 +4,15 @@
                 <div class="row">
                     <div class="col-lg-6 col-12 d-lg-block d-none">
                         <h4 class="mb-3">Online Users</h4>
-                        
+                         @if($online_user_count > 0)
+                            @foreach($onlineUsers as $user)
+                                 <div class="avatar {{ $loop->iteration % 2 == 0 ? 'dark-gray' : 'light-gray' }}">
+<img src="https://imager.habboon.pw/?figure={{ $user->look }}&direction=3&head_direction=3&gesture=sml&headonly=1" alt="{{ $user->username }}"  data-toggle="tooltip" data-placement="top" title="{{ $user->username }}" loading="lazy">
+                                </div>
+                            @endforeach
+                            @else
+                            <p>No users online.</p>
+                            @endif
                     </div>
                     <div class="col-lg-3 col-6">
                         <h4 class="mb-3">Help</h4>

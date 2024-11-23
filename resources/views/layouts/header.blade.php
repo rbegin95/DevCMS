@@ -4,7 +4,7 @@
         <div class="row justify-content-center justify-content-md-between justify-content-lg-between align-items-center">
             <div class="col-lg-3 col-md-6 d-lg-block d-md-block d-flex justify-content-center">
                 <a href="/">
-                    <img src="{{ asset('/img/dev.gif') }}" alt="Habboon Logo" loading="lazy">
+                    <img src="{{ asset('/img/dev.gif') }}" alt="Dev Logo" loading="lazy">
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-12 mt-2 mt-md-0">
@@ -68,10 +68,13 @@
                 <li class="nav-item">
                     <a href="{{ route('help') }}" class="nav-link {{ request()->routeIs('help') ? 'active' : '' }}">Help</a>
                 </li>
-                @if (App\Models\WebsiteSetting::getSetting('staff_application_tab_visible') == 'true')
-                <li class="nav-item d-md-none d-lg-block">
-                    <a href="{{ route('staff.application') }}" class="nav-link {{ request()->routeIs('staff.application') ? 'active' : '' }}" style="color: red;">Staff Application</a>
-                </li>
+                @php
+                    $websiteSetting = App\Models\WebsiteSetting::first();
+                @endphp
+                @if ($websiteSetting && $websiteSetting->staff_application_tab_visible == 'true' && !request()->is('/'))
+                    <li class="nav-item d-md-none d-lg-block">
+                        <a href="{{ route('staff.application') }}" class="nav-link {{ request()->routeIs('staff.application') ? 'active' : '' }}" style="color: red;">Staff Application</a>
+                    </li>
                 @endif
             </ul>
             @if (!View::hasSection('body-class') || trim(View::yieldContent('body-class')) !== 'registration-page')
@@ -80,9 +83,7 @@
                         @if (!Auth::user()->isBanned())
                             <li class="nav-item d-none d-md-block d-flex align-items-center">
                                 @if (Auth::user()->rank >= 5)
-                                    <div class="btn btn-danger" style="margin-right: 10px;">
-                                        Housekeeping
-                                    </div>
+                                    <a href="/housekeeping" class="btn btn-danger" style="margin-right: 10px;">Housekeeping</a>
                                 @endif
                                 <a href="/client" class="btn btn-success">Enter Hotel</a>
                             </li>
@@ -103,7 +104,6 @@
                                 </div>
                             </li>
                         @else
-                            <!-- Display logout option for banned users -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img src="https://imager.habboon.pw/?figure={{ Auth::user()->look ?? '' }}&size=m&direction=4&head_direction=4&gesture=sml&headonly=1" alt="{{ Auth::user()->username ?? 'User' }}" class="avatar d-none d-md-inline-block d-lg-inline-block" loading="lazy">
@@ -121,9 +121,9 @@
                         @endif
                     @endauth
                     @guest
-                    <li class="nav-item d-none d-md-block">
-                        <a href="{{ route('home') }}" class="btn btn-primary">Login</a>
-                    </li>
+                        <li class="nav-item d-none d-md-block">
+                            <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
+                        </li>
                     @endguest
                 </ul>
             @else

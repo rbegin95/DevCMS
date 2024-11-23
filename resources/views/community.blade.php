@@ -18,31 +18,31 @@
     <div class="row">
         @forelse ($articles as $article)
         <div class="col-xl-4 col-lg-6 col-md-6 col-12">
-            <a href="{{ route('articles.show', ['id' => $article->id, 'name' => \Illuminate\Support\Str::slug($article->title)]) }}">
-                <div class="card">
-                    <div class="card-body" style="background-image: url('{{ asset('/' . $article->img) }}');">
-                        <div class="avatar">
-                            <img src="https://imager.habboon.pw/?figure={{ $article->user->look }}&size=m&direction=2&head_direction=2&gesture=sml&headonly=1" data-toggle="tooltip" data-placement="top" data-title="{{ $article->user->name }}">
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h6>
-                            <a href="{{ route('articles.show', ['id' => $article->id, 'name' => \Illuminate\Support\Str::slug($article->name)]) }}">{{ $article->name }}</a>
-                        </h6>
-                        <p>{{ $article->desc }}</p>
-                        <div class="info">
-                            <div class="initial">
-                                <span class="username">{{ $article->published_by }}</span>
-                                <span class="published">
-                                    <i class="fas fa-clock"></i>
-                                     {{ $article->created_at->timezone('-04:00')->diffForHumans() }}
-                                </span>
-                            </div>
-                        </div>
+    <a href="{{ route('articles.show', ['id' => $article->id, 'name' => \Illuminate\Support\Str::slug($article->title)]) }}">
+        <div class="card">
+            <div class="card-body" style="background-image: url('{{ asset('/' . $article->img) }}');">
+                <div class="avatar">
+                    <img src="https://imager.habboon.pw/?figure={{ $article->user->look }}&size=m&direction=2&head_direction=2&gesture=sml&headonly=1" data-toggle="tooltip" data-placement="top" data-title="{{ $article->user->name }}">
+                </div>
+            </div>
+            <div class="card-footer">
+                <h6>
+                    <a href="{{ route('articles.show', ['id' => $article->id, 'name' => \Illuminate\Support\Str::slug($article->title)]) }}">{{ $article->title }}</a>
+                </h6>
+                <p>{{ $article->desc }}</p>
+                <div class="info">
+                    <div class="initial">
+                        <span class="username">{{ $article->published_by }}</span>
+                        <span class="published">
+                            <i class="fas fa-clock"></i>
+                            {{ $article->created_at->timezone('-04:00')->diffForHumans() }}
+                        </span>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
+    </a>
+</div>
         @empty
         <div class="col-12">
             <p>No articles found.</p>

@@ -5,23 +5,41 @@ namespace App\Http\Controllers\Housekeeping;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WebsiteSetting;
+use App\Models\CheckMaintenanceMode;
 
 class HousekeepingSiteSettingsController extends Controller
 {
-    // Display the Site Settings page
     public function index()
     {
-        $staffApplicationTabVisible = WebsiteSetting::getSetting('staff_application_tab_visible', 'false');
+        $staffApplicationTabVisible = WebsiteSetting::isStaffApplicationTabVisible();
+        $maintenanceMode = WebsiteSetting::first()->maintenance_mode;
 
-        return view('housekeeping.admin.sitesettings', compact('staffApplicationTabVisible'));
+        return view('housekeeping.admin.sitesettings', compact('staffApplicationTabVisible', 'maintenanceMode'));
     }
 
-    // Update the "Staff Application" tab visibility
-    public function updateStaffApplicationTab(Request $request)
-    {
-        $visible = $request->has('staff_application_tab_visible') ? 'true' : 'false';
-        WebsiteSetting::setSetting('staff_application_tab_visible', $visible);
+    public function updateSiteSettings(Request $request)
+{
+    $messages = [];
 
-        return redirect()->route('housekeeping.admin.sitesettings')->with('success', 'Staff Application tab visibility updated successfully!');
+    // Handle Staff Application Tab Visibility
+    $staffApplicationTabVisible = $request->input('staff_application_tab_visible');
+    if (WebsiteSetting::isStaffApplicationTabVisible() != $staffApplicationTabVisible) {
+        WebsiteSetting::updateStaffApplicationTab($staffApplicationTabVisible);
+        $messages[] = $staffApplicationTabVisible == 'true' ? 'You have enabled Staff Applications!' : 'You have disabled Staff Applications!';
+        logHousekeepingActivity("User: " . auth()->user()->username . " has " . ($staffApplicationTabVisible == 'true' ? 'enabled' : 'disabled') . " Staff Application Tab.");
     }
+
+    // Handle Maintenance Mode
+    $maintenanceMode = $request->input('maintenance_mode') === 'true' ? 'true' : 'false';
+    if (WebsiteSetting::first()->maintenance_mode != $maintenanceMode) {
+        WebsiteSetting::setMaintenanceMode($maintenanceMode);
+        $messages[] = $maintenanceMode == 'true' ? 'You have enabled Maintenance Mode!' : 'You have disabled Maintenance Mode!';
+        logHousekeepingActivity("User: " . auth()->user()->username . " has " . ($maintenanceMode == 'true' ? 'enabled' : 'disabled') . " Maintenance Mode.");
+    }
+
+    // Combine the messages into a single string
+    $successMessage = implode(' ', $messages);
+
+    return redirect()->route('housekeeping.admin.sitesettings')->with('success', $successMessage);
+}
 }

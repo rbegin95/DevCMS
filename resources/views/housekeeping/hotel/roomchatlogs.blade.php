@@ -38,5 +38,8 @@
             @endforelse
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+         {{ $chatLogs->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

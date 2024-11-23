@@ -23,6 +23,7 @@ use App\Http\Controllers\Housekeeping\HousekeepingActivityLogController;
 use App\Http\Controllers\Housekeeping\HousekeepingSiteSettingsController;
 use App\Http\Controllers\Housekeeping\StaffApplicationsController;
 use App\Http\Controllers\Housekeeping\PasswordRestoreController;
+use App\Http\Controllers\Housekeeping\PermissionsController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\HousekeepingAuthController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -30,10 +31,15 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Housekeeping\SiteSupportController;
 use App\Http\Controllers\NitroController;
 
-
 /* Index Page */
 Route::get('/', [NewsController::class, 'index'])->name('home');
 Route::get('/banned', BannedController::class, '__invoke')->name('banned');
+
+/* Maintenance Page */
+
+Route::get('/maintenance', function () {
+    return view('maintenance');
+})->name('maintenance');
 
 /* Me Page */
 Route::middleware([
@@ -156,6 +162,9 @@ Route::prefix('housekeeping')->group(function () {
         Route::post('/wordfilter', [WordFilterController::class, 'store'])->name('housekeeping.hotel.wordfilter.store');
         Route::delete('/wordfilter/{key}', [WordFilterController::class, 'destroy'])->name('housekeeping.hotel.wordfilter.destroy');
 
+        Route::get('/permissions', [PermissionsController::class, 'index'])->name('housekeeping.permissions.index');
+        Route::put('/permissions/{rank}', [PermissionsController::class, 'updatePermissions'])->name('housekeeping.permissions.update');
+
 
         /* Website Column */
  
@@ -174,8 +183,8 @@ Route::prefix('housekeeping')->group(function () {
         Route::get('/admin/activitylogs', [HousekeepingActivityLogController::class, 'index'])->name('housekeeping.admin.activitylogs');
 
         Route::get('/admin/sitesettings', [HousekeepingSiteSettingsController::class, 'index'])->name('housekeeping.admin.sitesettings');
-        Route::post('/admin/sitesettings', [HousekeepingSiteSettingsController::class, 'updateStaffApplicationTab'])
-        ->name('housekeeping.admin.sitesettings.stafftab');
+        Route::post('/admin/sitesettings', [HousekeepingSiteSettingsController::class, 'updateSiteSettings'])
+        ->name('housekeeping.admin.sitesettings.update');
 
         Route::get('admin/staffapps', [StaffApplicationsController::class, 'index'])->name('housekeeping.admin.staffapps');
         Route::post('admin/staffapps/promote', [StaffApplicationsController::class, 'promote'])->name('housekeeping.admin.staffapps.promote');

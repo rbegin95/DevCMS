@@ -22,8 +22,9 @@ class PrivateChatlogsController extends Controller
                              ->orWhere('chatlogs_private.user_from_id', 'like', '%' . $search . '%');
             })
             ->orderBy('chatlogs_private.timestamp', 'desc')
-            ->get();
+            ->paginate(20);
 
+        logHousekeepingActivity("User: " . auth()->user()->username . " has viewed private chatlogs");
         // Pass the data and search term to the view
         return view('housekeeping.hotel.privatechatlogs', ['chatLogs' => $chatLogs, 'search' => $search]);
     }

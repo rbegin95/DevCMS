@@ -67,6 +67,10 @@
                     @endforelse
                 </tbody>
             </table>
+            <br />
+            <div class="d-flex justify-content-center">
+         {{ $assignedBadges->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 </div>

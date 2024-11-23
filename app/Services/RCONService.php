@@ -118,6 +118,11 @@ class RconService
         return $this->sendPacket('updatecatalog');
     }
 
+    public function updatePermissions()
+    {
+        return $this->sendPacket('update_permissions');
+    }
+
     public function alertUser(User $user, string $message)
     {
         return $this->sendPacket('alertuser', [

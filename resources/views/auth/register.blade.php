@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', config('app.name') . ' - Registration')
+@section('title', config('app.name') . ' - Register')
 
 @section('body-class', 'registration-page')
 
@@ -10,7 +10,7 @@
         <div class="col-lg-6 col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Register</h5>
+                    <h5 class="silver">Register</h5>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         @if ($errors->any())

@@ -87,5 +87,36 @@
     </div>
 </main>
    @endsection
+
+   @section('script')
+    <script>
+        $(function () {
+            $('input[name="username"]').keyup(debounce(function() {
+                $.get('/api/figure/' + $(this).val(), function (e) {
+                    if (e !== undefined && e.figure !== undefined && e.figure.length > 0) {
+                        $('#preview-user').css('background-image', 'url(https://imager.habboon.pw/?figure=' + e.figure + '&size=m&direction=4&head_direction=3&gesture=sml&action=wav)');
+                    } else {
+                        $('#preview-user').css('background-image', 'url(/img/ghost.png)');
+                    }
+                });
+            }, 500));
+
+            function debounce(func, wait, immediate) {
+                var timeout;
+                return function() {
+                    var context = this, args = arguments;
+                    var later = function() {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    };
+                    var callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+                };
+            };
+        });
+    </script>
+    @endsection
 </body>
 </html>

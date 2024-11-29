@@ -137,7 +137,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('housekeeping.permissions.index') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.index') ? 'active' : '' }}">
+                <a href="{{ route('housekeeping.permissions.index') }}" class="nav-link {{ request()->routeIs('housekeeping.permissions.index') ? 'active' : '' }}">
                      Permissions
                 </a>
             </li>
@@ -182,6 +182,28 @@
                     <li class="nav-item">
                         <a href="{{ route('housekeeping.camera.cameraweb') }}" class="nav-link {{ request()->routeIs('housekeeping.camera.cameraweb') ? 'active' : '' }}">
                            Camera Web
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Catalogue Section -->
+            <li class="nav-item">
+                <a href="#catalogSubMenu" class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">
+                    <span>
+                        <i class="bi bi-bag fill"></i> Catalogue
+                    </span>
+                    <i class="bi bi-caret-right" id="catalogCaret"></i>
+                </a>
+                <ul class="collapse nav flex-column ms-3" id="catalogSubMenu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                           Catalogue Pages
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Catalogue Items
                         </a>
                     </li>
                 </ul>
@@ -247,6 +269,9 @@
             var adminSubMenu = document.getElementById('adminSubMenu');
             var adminCaret = document.getElementById('adminCaret');
 
+            var catalogSubMenu = document.getElementById('catalogSubMenu');
+            var catalogCaret = document.getElementById('catalogCaret');
+
             // Hotel Menu
             hotelSubMenu.addEventListener('show.bs.collapse', function () {
                 hotelCaret.classList.remove('bi-caret-right');
@@ -279,6 +304,18 @@
             adminSubMenu.addEventListener('hide.bs.collapse', function () {
                 adminCaret.classList.remove('bi-caret-down');
                 adminCaret.classList.add('bi-caret-right');
+            });
+
+            //Catalogue Menu
+
+            catalogSubMenu.addEventListener('show.bs.collapse', function () {
+                catalogCaret.classList.remove('bi-caret-right');
+                catalogCaret.classList.add('bi-caret-down');
+            });
+
+            catalogSubMenu.addEventListener('hide.bs.collapse', function () {
+                catalogCaret.classList.remove('bi-caret-down');
+                catalogCaret.classList.add('bi-caret-right');
             });
         });
     </script>

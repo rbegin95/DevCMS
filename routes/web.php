@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Middleware\RedirectIfUnauthenticated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommunityCameraWebController;
 use App\Http\Controllers\BannedController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StaffApplicationController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\Account\AccountSettingsController;
 use App\Http\Controllers\Housekeeping\CreateArticlesController;
 use App\Http\Controllers\Housekeeping\DashboardController;
@@ -35,12 +38,6 @@ use App\Http\Controllers\NitroController;
 Route::get('/', [NewsController::class, 'index'])->name('home');
 Route::get('/banned', BannedController::class, '__invoke')->name('banned');
 
-/* Maintenance Page */
-
-Route::get('/maintenance', function () {
-    return view('maintenance');
-})->name('maintenance');
-
 /* Me Page */
 Route::middleware([
     'auth:sanctum',
@@ -48,12 +45,19 @@ Route::middleware([
     'verified',
     'auth.session',
     'banned',
+    RedirectIfUnauthenticated::class, // Add your custom middleware here
 ])->group(function () {
     Route::get('/me', [NewsController::class, 'dashboard'])->name('dashboard');
 });
 
 Route::get('/staff-application', [StaffApplicationController::class, 'create'])->name('staff.application');
 Route::post('/staff-application', [StaffApplicationController::class, 'store'])->name('staff.application.submit');
+
+/* Maintenance Page */
+
+Route::get('/maintenance', function () {
+    return view('maintenance');
+})->name('maintenance');
 
 /* Account Settings */
 
@@ -65,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/account/email', [AccountSettingsController::class, 'updateEmail'])->name('account.email.update');
 
     Route::get('/account/password', [AccountSettingsController::class, 'showUpdatePassword'])->name('account.password');
-Route::post('/account/password', [AccountSettingsController::class, 'updatePassword'])->name('account.password.update');
+    Route::post('/account/password', [AccountSettingsController::class, 'updatePassword'])->name('account.password.update');
 
 });
 
@@ -73,23 +77,24 @@ Route::post('/account/password', [AccountSettingsController::class, 'updatePassw
 Route::get('/client', NitroController::class)->name('nitro-client');
 
 /* Community Pages */
+
 Route::get('/community', [CommunityController::class, 'index'])->name('community');
 Route::get('/articles', [NewsController::class, 'AllArticles'])->name('AllArticles');
 Route::get('/articles/{id}-{name}', [NewsController::class, 'GetRecents'])->name('articles.show');
 Route::post('/comments', [NewsController::class, 'storeComment'])->name('comments.store');
 Route::get('/community/gotw', [CommunityController::class, 'GOTW'])->name('gotw');
 Route::get('/community/leaderboards', [CommunityController::class, 'MostStuff'])->name('leaderboards');
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
-
 Route::get('/community/online-players', [UserController::class, 'onlinePlayers'])->name('players');
 Route::get('/community/staff', [StaffController::class, 'index'])->name('staff');
 
+/* Photo Gallery */
+
+Route::get('/gallery', [CommunityController::class, 'gallery'])->name('gallery');
+Route::post('/gallery/{photoId}/toggle-like', [CommunityCameraWebController::class, 'toggleLike']);
+
 /* Marketplace Pages */
-Route::get('/marketplace', function () {
-    return view('marketplace');
-})->name('marketplace');
+
+Route::get('/marketplace', [MarketplaceController::class, 'showMarketplace'])->name('marketplace');
 
 /* Store Pages */
 Route::get('/store', function () {

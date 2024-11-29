@@ -55,14 +55,28 @@
     });
 
     document.getElementById('image').addEventListener('change', function(event) {
-        const selectedImage = event.target.value;
-        const img = document.getElementById('image-preview');
-        if (selectedImage) {
-            img.src = `/img/webpromo/${selectedImage}`;
-            img.style.display = 'block';
-        } else {
-            img.style.display = 'none';
-        }
-    });
+    const selectedImage = event.target.value; // This is assumed to be the image filename or path.
+    const img = document.getElementById('image-preview'); // Image preview element.
+
+    if (selectedImage) {
+        // Set the thumbnail as a placeholder.
+        img.src = `/img/webpromo/${selectedImage}`;
+        img.style.display = 'block';
+
+        // Listen for hover or click event to load the full image for preview.
+        img.addEventListener('click', function() {
+            // Load the full resolution image.
+            const highResImage = new Image();
+            highResImage.src = `/img/webpromo/${selectedImage}`;
+
+            // Replace the image preview source when the high-res image is loaded.
+            highResImage.onload = function() {
+                img.src = highResImage.src;
+            };
+        });
+    } else {
+        img.style.display = 'none';
+    }
+});
 </script>
 @endsection

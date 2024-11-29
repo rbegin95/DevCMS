@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('/web/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('/img/favicon-d.png') }}" type="image/vnd.microsoft.icon"/>
@@ -43,42 +44,12 @@
 
     @include('layouts.footer')
 
-    @yield('script')
-
     <script src="{{ asset('/web/manifest.js') }}"></script>
     <script src="{{ asset('/web/vendor.js') }}"></script>
     <script src="{{ asset('/web/app.js') }}"></script>
 
+    @yield('script')
 
-    <script>
-$(document).ready(function() {
-    $('input[name="username"]').keyup(debounce(function() {
-        $.get('/api/figure/' + $(this).val(), function(e) {
-            if (e !== undefined && e.figure !== undefined && e.figure.length > 0) {
-                $('#preview-user').css('background-image', 'url(https://imager.habboon.pw/?figure=' + e.figure + '&size=m&direction=4&head_direction=3&gesture=sml&action=wav)');
-            } else {
-                $('#preview-user').css('background-image', 'url(/img/ghost.png)');
-            }
-        });
-    }, 500));
-
-    function debounce(func, wait, immediate) {
-        var timeout;
-        return function() {
-            var context = this,
-                args = arguments;
-            var later = function() {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-            };
-            var callNow = immediate && !timeout;
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-            if (callNow) func.apply(context, args);
-        };
-    }
-});
-</script>
 
 </body>
 </html>

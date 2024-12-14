@@ -1,4 +1,7 @@
 <footer class="position-relative mt-5">
+    @if($currentTheme === 'Christmas')
+    <div class="christmas-trees"></div>
+    @endif
         <div id="footer" class="py-4">
             <div class="container">
                 <div class="row">
@@ -18,13 +21,13 @@
                         <h4 class="mb-3">Help</h4>
                         <ul class="links">
                             <li class="mb-1">
-                                <a href="https://www.habboon.pw/help" aria-label="Help">
+                                <a href="/help" aria-label="Help">
                                     <i class="fas fa-question" style="left: -5px;margin-top: 2px;"></i>
                                      Help
                                 </a>
                             </li>
                             <li class="mb-1">
-                                <a href="https://www.habboon.pw/help/tickets" aria-label="Tickets">
+                                <a href="/help/tickets" aria-label="Tickets">
                                     <i class="fas fa-ticket-alt" style="left: -6px;margin-top: 2px;"></i>
                                      Tickets
                                 </a>
@@ -68,3 +71,20 @@
             <p>{{ config('app.name')}} is a not for profit educational project.</p>
         </div>
     </footer>
+
+    @if($currentTheme === 'Christmas')
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+@endif

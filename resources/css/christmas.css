@@ -193,7 +193,7 @@
     height: 100%;
     position: relative;
     width: 100%;
-    z-index:1
+    z-index: 1
 }
 
 .owl-theme .owl-dots, .owl-theme .owl-nav {
@@ -252,10 +252,12 @@
 }
 
 @charset "UTF-8";
-/*!* Bootstrap v4.6.2 (https://getbootstrap.com/)
-* Copyright 2011-2022 The Bootstrap Authors
-* Copyright 2011-2022 Twitter, Inc.
-* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)*/
+/*!
+ * Bootstrap v4.6.2 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
 :root {
     --blue: #3490dc;
     --indigo: #6574cd;
@@ -293,7 +295,7 @@
 
 html {
     -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     font-family: sans-serif;
     line-height:1.15
 }
@@ -2322,7 +2324,7 @@ select.form-control[multiple], select.form-control[size], textarea.form-control 
 }
 
 .form-control.is-valid, .was-validated .form-control:valid {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPjxwYXRoIGZpbGw9JyMzOGMxNzInIGQ9J00yLjMgNi43My42IDQuNTNjLS40LTEuMDQuNDYtMS40IDEuMS0uOGwxLjEgMS40IDMuNC0zLjhjLjYtLjYzIDEuNi0uMjcgMS4yLjdsLTQgNC42Yy0uNDMuNS0uOC40LTEuMS4xeicvPjwvc3ZnPg==);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath fill='%2338c172' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E");
     background-position: right calc(.4em + .1875rem) center;
     background-repeat: no-repeat;
     background-size: calc(.8em + .375rem) calc(.8em + .375rem);
@@ -2427,7 +2429,7 @@ select.form-control[multiple], select.form-control[size], textarea.form-control 
 }
 
 .form-control.is-invalid, .was-validated .form-control:invalid {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMicgaGVpZ2h0PScxMicgZmlsbD0nbm9uZScgc3Ryb2tlPScjZTMzNDJmJz48Y2lyY2xlIGN4PSc2JyBjeT0nNicgcj0nNC41Jy8+PHBhdGggc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcgZD0nTTUuOCAzLjZoLjRMNiA2LjV6Jy8+PGNpcmNsZSBjeD0nNicgY3k9JzguMicgcj0nLjYnIGZpbGw9JyNlMzM0MmYnIHN0cm9rZT0nbm9uZScvPjwvc3ZnPg==);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23e3342f'%3E%3Ccircle cx='6' cy='6' r='4.5'/%3E%3Cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3E%3Ccircle cx='6' cy='8.2' r='.6' fill='%23e3342f' stroke='none'/%3E%3C/svg%3E");
     background-position: right calc(.4em + .1875rem) center;
     background-repeat: no-repeat;
     background-size: calc(.8em + .375rem) calc(.8em + .375rem);
@@ -3754,7 +3756,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label:after {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPjxwYXRoIGZpbGw9JyNmZmYnIGQ9J202LjU2NC43NS0zLjU5IDMuNjEyLTEuNTM4LTEuNTVMMCA0LjI2bDIuOTc0IDIuOTlMOCAyLjE5M3onLz48L3N2Zz4=)
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath fill='%23fff' d='m6.564.75-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3E%3C/svg%3E")
 }
 
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label:before {
@@ -3763,7 +3765,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label:after {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0JyBoZWlnaHQ9JzQnPjxwYXRoIHN0cm9rZT0nI2ZmZicgZD0nTTAgMmg0Jy8+PC9zdmc+)
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E")
 }
 
 .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label:before {
@@ -3779,7 +3781,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label:after {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMicgaGVpZ2h0PScxMicgdmlld0JveD0nLTQgLTQgOCA4Jz48Y2lyY2xlIHI9JzMnIGZpbGw9JyNmZmYnLz48L3N2Zz4=)
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E")
 }
 
 .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label:before {
@@ -4183,7 +4185,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .nav-pills .nav-link {
-    background: 0 0;
+    background: none;
     border: 0;
     border-radius:.25rem
 }
@@ -4537,7 +4539,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .navbar-light .navbar-toggler-icon {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMCcgaGVpZ2h0PSczMCc+PHBhdGggc3Ryb2tlPSdyZ2JhKDAsIDAsIDAsIDAuNSknIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2Utd2lkdGg9JzInIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+)
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
 }
 
 .navbar-light .navbar-text {
@@ -4574,7 +4576,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .navbar-dark .navbar-toggler-icon {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMCcgaGVpZ2h0PSczMCc+PHBhdGggc3Ryb2tlPSdyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSknIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2Utd2lkdGg9JzInIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+)
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
 }
 
 .navbar-dark .navbar-text {
@@ -6305,7 +6307,7 @@ a.close.disabled {
 
 .carousel-control-next, .carousel-control-prev {
     align-items: center;
-    background: 0 0;
+    background: none;
     border: 0;
     bottom: 0;
     color: #fff;
@@ -6350,11 +6352,11 @@ a.close.disabled {
 }
 
 .carousel-control-prev-icon {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGZpbGw9JyNmZmYnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPjxwYXRoIGQ9J201LjI1IDAtNCA0IDQgNCAxLjUtMS41TDQuMjUgNGwyLjUtMi41TDUuMjUgMHonLz48L3N2Zz4=)
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='8' height='8'%3E%3Cpath d='m5.25 0-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/%3E%3C/svg%3E")
 }
 
 .carousel-control-next-icon {
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGZpbGw9JyNmZmYnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPjxwYXRoIGQ9J20yLjc1IDAtMS41IDEuNUwzLjc1IDRsLTIuNSAyLjVMMi43NSA4bDQtNC00LTR6Jy8+PC9zdmc+)
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='8' height='8'%3E%3Cpath d='m2.75 0-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/%3E%3C/svg%3E")
 }
 
 .carousel-indicators {
@@ -10110,7 +10112,6 @@ header .btn-enter-hotel:focus, header .btn-enter-hotel:hover {
 
 .habboon-nav .nav-link {
     color: #383838 !important;
-    font-size: 14px;
     font-weight: 700;
     letter-spacing: .5px !important;
     text-transform:uppercase
@@ -10131,8 +10132,7 @@ header .btn-enter-hotel:focus, header .btn-enter-hotel:hover {
 }
 
 .habboon-nav .dropdown-menu .dropdown-item.active, .habboon-nav .dropdown-menu .dropdown-item:focus, .habboon-nav .dropdown-menu .dropdown-item:hover {
-    background-color: #8ecfe2;
-    color:#fff
+    background-color:#8ecfe2
 }
 
 @media (max-width: 767.98px) {
@@ -10180,7 +10180,7 @@ header .btn-enter-hotel:focus, header .btn-enter-hotel:hover {
 }
 
 #articles-carousel.carousel .carousel-inner .carousel-item .carousel-caption h5 {
-    background: 0 0;
+    background: transparent;
     box-shadow: none !important;
     margin: 0 0 10px;
     padding:0
@@ -10465,6 +10465,259 @@ header .btn-enter-hotel:focus, header .btn-enter-hotel:hover {
 .offer .badge {
     right: 5px;
     top:5px
+}
+
+body {
+    background-color:#f8fafc !important
+}
+
+#app-alert {
+    background-color: #39afa7 !important;
+    border-radius: 0 !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04) !important;
+    padding:15px 0
+}
+
+header {
+    background: url(/seasonal/christmas/header-xmas22.png) no-repeat 100%, linear-gradient(#a6d8e8, #d0e4f4);
+    box-shadow: inset 0 0 0 1000px rgba(26, 93, 194, .2) !important;
+    height:160px !important
+}
+
+.habboon-nav .nav-link {
+    color: #424251 !important;
+    font-size: 14px;
+    letter-spacing:1px
+}
+
+.habboon-nav .nav-link.active, .habboon-nav .nav-link:focus, .habboon-nav .nav-link:hover {
+    color:#7acd86 !important
+}
+
+.habboon-nav .dropdown-menu .dropdown-item.active, .habboon-nav .dropdown-menu .dropdown-item:focus, .habboon-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #7acd86 !important;
+    color:#fff
+}
+
+h5.silver {
+    background: #7acd86 !important;
+    border: 0 !important;
+    color: #fff !important;
+    text-shadow:none !important
+}
+
+header .enter div {
+    background-color:#7acd86 !important
+}
+
+header .enter div:focus, header .enter div:hover {
+    background-color:rgba(122, 205, 134, .8) !important
+}
+
+.btn.btn-success, .enter {
+    background-color:#7acd86 !important
+}
+
+.btn.btn-success:focus, .btn.btn-success:hover, .enter:focus, .enter:hover {
+    background-color:rgba(122, 205, 134, .8) !important
+}
+
+.btn-primary {
+    background-color:#89cdf0 !important
+}
+
+.btn-primary:focus, .btn-primary:hover {
+    background-color:rgba(137, 205, 240, .8) !important
+}
+
+#me {
+    background-image: url(/seasonal/christmas/user-panel-bg.png) !important;
+    background-position: bottom !important;
+    background-repeat:no-repeat !important
+}
+
+#me .avatar {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow:none !important
+}
+
+footer .christmas-trees {
+    background-repeat-y: no-repeat;
+    background-image: url(/seasonal/christmas/header-background.png);
+    bottom: 210px;
+    height: 210px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index:-1
+}
+
+.snowflake {
+    -webkit-animation-duration: 10s, 3s;
+    animation-duration: 10s, 3s;
+    -webkit-animation-iteration-count: infinite, infinite;
+    animation-iteration-count: infinite, infinite;
+    -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    -webkit-animation-play-state: running, running;
+    animation-play-state: running, running;
+    -webkit-animation-timing-function: linear, ease-in-out;
+    animation-timing-function: linear, ease-in-out;
+    color: #fff;
+    cursor: default;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    position: fixed;
+    text-shadow: 0 0 5px #000;
+    top: -10%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    z-index:9999
+}
+
+.snowflake:nth-of-type(0) {
+    animation-delay: 0s, 0s;
+    left:1%
+}
+
+.snowflake:first-of-type {
+    animation-delay: 1s, 1s;
+    left:10%
+}
+
+.snowflake:nth-of-type(2) {
+    animation-delay: 6s, .5s;
+    left:20%
+}
+
+.snowflake:nth-of-type(3) {
+    animation-delay: 4s, 2s;
+    left:30%
+}
+
+.snowflake:nth-of-type(4) {
+    animation-delay: 2s, 2s;
+    left:40%
+}
+
+.snowflake:nth-of-type(5) {
+    animation-delay: 8s, 3s;
+    left:50%
+}
+
+.snowflake:nth-of-type(6) {
+    animation-delay: 6s, 2s;
+    left:60%
+}
+
+.snowflake:nth-of-type(7) {
+    animation-delay: 2.5s, 1s;
+    left:70%
+}
+
+.snowflake:nth-of-type(8) {
+    animation-delay: 1s, 0s;
+    left:80%
+}
+
+.snowflake:nth-of-type(9) {
+    animation-delay: 3s, 1.5s;
+    left:90%
+}
+
+.snowflake:nth-of-type(10) {
+    animation-delay: 2s, 0s;
+    left:25%
+}
+
+.snowflake:nth-of-type(11) {
+    animation-delay: 4s, 2.5s;
+    left:65%
+}
+
+@keyframes snowflakes-fall {
+    0% {
+        top:-10%
+    }
+
+    to {
+        top:100%
+    }
+}
+
+@keyframes snowflakes-shake {
+    0%, to {
+        transform:translateX(0)
+    }
+
+    50% {
+        transform:translateX(80px)
+    }
+}
+
+#advent-calendar.christmas-theme .advent-door {
+    background-image:url(/seasonal/christmas/advent/bg.png)
+}
+
+#advent-calendar.christmas-theme .advent-door .present {
+    background-color:#69c4e8
+}
+
+#advent-calendar.christmas-theme .advent-door .present:hover {
+    background-color:rgba(105, 196, 232, .6)
+}
+
+#advent-calendar.gingerbread-theme .advent-door {
+    background-image:url(/seasonal/christmas/advent_ginger/bg.png)
+}
+
+#advent-calendar.gingerbread-theme .advent-door .card-body {
+    padding-bottom:160px !important
+}
+
+#advent-calendar.gingerbread-theme .advent-door .card-body .present {
+    background-color:#f18eb8
+}
+
+#advent-calendar.gingerbread-theme .advent-door .card-body .present:hover {
+    background-color:rgba(241, 142, 184, .6)
+}
+
+#advent-calendar .advent-door {
+    background-position: 50%;
+    background-size: cover;
+    border-radius:8px
+}
+
+#advent-calendar .advent-door .card-body {
+    padding-bottom:120px
+}
+
+#advent-calendar .advent-door .card-body .day {
+    color: #7dc9ec;
+    font-size:14px
+}
+
+#advent-calendar .advent-door .card-body .lock {
+    right: 14px;
+    top:14px
+}
+
+#advent-calendar .advent-door .card-body .present {
+    border: 4px solid #fff;
+    border-radius: 100%;
+    height: 125px;
+    margin-top: 80px;
+    transition-duration: .15s;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    width:125px
+}
+
+#advent-calendar .advent-door .card-body .present.not-open {
+    cursor:pointer
 }
 
 body {
@@ -10762,7 +11015,7 @@ main {
 
 .player .controls input[type=range] {
     -webkit-appearance: none;
-    background:0 0
+    background:transparent
 }
 
 .player .controls input[type=range]:focus {
@@ -10826,7 +11079,7 @@ main {
 }
 
 .player .controls input[type=range]::-ms-track {
-    background: 0 0;
+    background: transparent;
     border-color: transparent;
     border-width: 16px 0;
     color: transparent;
@@ -11862,3 +12115,5 @@ footer #legal-footer p {
     position: relative;
     width: 64px
 }
+
+/*# sourceMappingURL=app.css.map*/

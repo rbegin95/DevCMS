@@ -31,14 +31,14 @@
                             </label>
                             <select name="ticket_type" class="form-control" required>
                                 <option value>Please select an option</option>
-                                <option value="ban_appeal">Ban Appeal</option>
-                                <option value="scam_report">Scam Report</option>
-                                <option value="proxy_appeal">VPN/Proxy Whitelist Request</option>
-                                <option value="room_ads">Room Ad Rights Request</option>
-                                <option value="password_recovery">Password Recovery</option>
-                                <option value="store_payment">Store Payment</option>
-                                <option value="desktop_client">Desktop Client</option>
-                                <option value="other">Other</option>
+                                <option value="Ban Appeal">Ban Appeal</option>
+                                <option value="Scam Report">Scam Report</option>
+                                <option value="Proxy Whitelist">VPN/Proxy Whitelist Request</option>
+                                <option value="Room Ads">Room Ad Rights Request</option>
+                                <option value="Password Recovery">Password Recovery</option>
+                                <option value="Store Payment">Store Payment</option>
+                                <option value="Desktop Client">Desktop Client</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">

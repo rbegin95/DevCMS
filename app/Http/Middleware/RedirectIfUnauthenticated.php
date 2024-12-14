@@ -18,7 +18,7 @@ class RedirectIfUnauthenticated
     {
         // Redirect unauthenticated users to the homepage
         if (!Auth::check()) {
-            return redirect('/'); // Replace `/` with the route to your login page
+            return redirect()->route('home'); // Assumes 'home' is the named route for your homepage
         }
 
         return $next($request);

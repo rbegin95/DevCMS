@@ -59,7 +59,10 @@
                         <div class="forum-group">
                             <x-label for="username" value="{{ __('Username') }}" />
                             <x-input id="username" class="form-control" type="username" name="username" :value="old('username')" required autofocus autocomplete="username" />
-                            <div id="preview-user" style="background-image: url('https://www.habboon.pw/img/ghost.png');"></div>
+                            <div id="preview-user" 
+                                style="background-image: url('{{ $currentTheme === 'Christmas' ? '/seasonal/christmas/ghost-christmas.png' : '/img/ghost.png' }}');">
+                            </div>
+
                         </div>
                         <p>
                         <div class="forum-group">

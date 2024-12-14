@@ -24,16 +24,25 @@ class SiteSupportController extends Controller
     }
 
     public function handle(Request $request)
-    {
-        // Find the ticket by ID
-        $ticket = SiteSupportTicket::findOrFail($request->ticket_id);
+{
+    // Validate the input
+    $request->validate([
+        'ticket_id' => 'required|exists:site_support_tickets,id', // Ensure ticket exists
+        'reply_message' => 'required|string|max:2000', // Adjust as needed
+    ]);
 
-        // Update the handled_by field with the staff member's username
-        $ticket->handled_by = Auth::user()->username; // Store the staff member's username
-        $ticket->reply_message = $request->reply_message; // Store the reply message
+    // Find the ticket by ID
+    $ticket = SiteSupportTicket::findOrFail($request->ticket_id);
 
-        $ticket->save();
+    // Update the ticket fields
+    $ticket->update([
+        'handled_by' => Auth::user()->username, // Store the staff member's username
+        'reply_message' => $request->reply_message, // Store the reply message
+        'status' => 'Closed', // Update the status to 'Handled'
+    ]);
 
-        return redirect()->route('housekeeping.support.siteticket')->with('success', 'Reply sent, and ticket marked as handled by you.');
-    }
+    // Redirect back with a success message
+    return redirect()->route('housekeeping.support.siteticket')->with('success', 'Reply sent, and ticket marked as handled.');
+}
+
 }

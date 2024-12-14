@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\RedirectIfUnauthenticated;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommunityCameraWebController;
@@ -29,7 +30,6 @@ use App\Http\Controllers\Housekeeping\PasswordRestoreController;
 use App\Http\Controllers\Housekeeping\PermissionsController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\HousekeepingAuthController;
-use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Housekeeping\SiteSupportController;
 use App\Http\Controllers\NitroController;
@@ -96,10 +96,12 @@ Route::post('/gallery/{photoId}/toggle-like', [CommunityCameraWebController::cla
 
 Route::get('/marketplace', [MarketplaceController::class, 'showMarketplace'])->name('marketplace');
 
-/* Store Pages */
+/* Store Page */
+
 Route::get('/store', function () {
     return view('store');
-})->name('store');
+})->middleware(App\Http\Middleware\RedirectIfUnauthenticated::class)->name('store');
+
 
 /* Help Pages */
 Route::get('/help', function () {
@@ -110,8 +112,13 @@ Route::get('/help/dev-way', function () {
     return view('theway');
 })->name('theway');
 
-Route::get('help/tickets/create', [SupportController::class, 'create'])->name('tickets.create');
-Route::post('help/tickets', [SupportController::class, 'store'])->name('tickets.store');
+/* Support Ticket Routes */
+
+Route::get('help/tickets', [SupportController::class, 'index'])->name('tickets.index'); // List all tickets
+Route::get('help/tickets/create', [SupportController::class, 'create'])->name('tickets.create'); // Show ticket form
+Route::post('help/tickets', [SupportController::class, 'store'])->name('tickets.store'); // Store a new ticket
+Route::get('help/tickets/{id}', [SupportController::class, 'show'])->name('tickets.show');
+
 
 /* HouseKeeping */
 

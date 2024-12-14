@@ -25,7 +25,19 @@ class CommunityController extends Controller
         // Get the random badges from BadgeController
         $randomBadges = $badgeController->show();
 
-        
+         // Fetch photos for the community page (similar to the gallery method)
+        $photos = DB::table('camera_web')
+        ->join('users', 'camera_web.user_id', '=', 'users.id')
+        ->select('camera_web.*', 'users.username', 'users.look')
+        ->orderBy('camera_web.timestamp', 'desc')
+        ->limit(12) // Fetch only the latest 12 photos
+        ->get()
+        ->map(function ($photo) {
+            $likedBy = json_decode($photo->liked_by ?? '[]');
+            $photo->liked_by_user = in_array(Auth::id(), $likedBy);
+            return $photo;
+        });
+
 
         return view('community', compact('articles', 'randomBadges', 'photos'));
     }

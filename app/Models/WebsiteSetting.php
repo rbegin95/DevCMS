@@ -8,41 +8,102 @@ class WebsiteSetting extends Model
 {
     // Define the table explicitly
     protected $table = 'website_settings';
-    
-    // Define the columns you can fill
-    protected $fillable = ['staff_application_tab_visible', 'maintenance_mode'];
 
     // Disable incrementing ID since the table doesn't have one
     public $incrementing = false;
 
+    // Let Laravel know there's no primary key
+    protected $primaryKey = null;
+
     // Disable timestamp columns since the table doesn't have `created_at` and `updated_at`
     public $timestamps = false;
 
-    // Update staff application tab visibility
-    public static function updateStaffApplicationTab($value)
-    {
-        // Update the value directly in the only row of the table
-        static::query()->update(['staff_application_tab_visible' => $value]);
-    }
+    // Add fillable properties
+    protected $fillable = ['staff_application_tab_visible', 'maintenance_mode', 'theme'];
 
-    // Update maintenance mode
-    public static function setMaintenanceMode($value)
-    {
-        // Update the value directly in the only row of the table
-        static::query()->update(['maintenance_mode' => $value]);
-    }
-
-    // Check if staff application tab is visible
+    /**
+     * Check if the staff application tab is visible.
+     */
     public static function isStaffApplicationTabVisible()
     {
         $setting = static::first();
-        return $setting ? $setting->staff_application_tab_visible : false;
+        return $setting ? $setting->staff_application_tab_visible : 'false'; // Default to 'false'
     }
 
-    // Get the current maintenance mode value
-    public static function getMaintenanceMode()
+    /**
+     * Update the visibility of the staff application tab.
+     */
+    public static function updateStaffApplicationTab($value)
     {
         $setting = static::first();
-        return $setting ? $setting->maintenance_mode : 'false';
+        if ($setting) {
+            $setting->staff_application_tab_visible = $value;
+            $setting->save();
+        }
     }
+
+    /**
+     * Check if maintenance mode is enabled.
+     */
+    public static function isMaintenanceModeEnabled()
+    {
+        $setting = static::first();
+        return $setting ? $setting->maintenance_mode : 'false'; // Default to 'false'
+    }
+
+    /**
+     * Update maintenance mode.
+     */
+    public static function updateMaintenanceMode($value)
+    {
+        $setting = static::first();
+        if ($setting) {
+            $setting->maintenance_mode = $value;
+            $setting->save();
+        }
+    }
+
+    /**
+     * Get the current theme.
+     */
+    public static function getTheme()
+    {
+        $setting = static::first();
+        return $setting ? $setting->theme : 'default'; // default.css is the default theme
+    }
+
+    /**
+     * Set the theme.
+     */
+    public static function setTheme($theme)
+    {
+        $setting = static::first();
+        if ($setting) {
+            $setting->theme = $theme;
+            $setting->save();
+        }
+    }
+
+    /**
+     * Trigger NPM build for theme updates.
+     */
+    
+    public static function buildTheme($theme)
+{
+    // Full path to npm and node 
+    $nodePath = '/opt/homebrew/bin/node';
+    $npmPath = '/opt/homebrew/bin/npm'; // Update with the output of `which npm`
+
+    // Export PATH and run the build
+    $command = "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin THEME={$theme} {$npmPath} run production 2>&1";
+
+    exec($command, $output, $returnVar);
+
+    // Log the output and exit code for debugging
+    logger()->info('Theme Build Output: ', $output);
+    logger()->info('Theme Build Exit Code: ' . $returnVar);
+
+    return $returnVar === 0; // Return true if the build succeeds
+}
+
 }

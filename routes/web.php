@@ -45,7 +45,7 @@ Route::middleware([
     'verified',
     'auth.session',
     'banned',
-    RedirectIfUnauthenticated::class, // Add your custom middleware here
+    App\Http\Middleware\RedirectIfUnauthenticated::class, // Add your custom middleware here
 ])->group(function () {
     Route::get('/me', [NewsController::class, 'dashboard'])->name('dashboard');
 });
@@ -80,7 +80,7 @@ Route::get('/client', NitroController::class)->name('nitro-client');
 
 Route::get('/community', [CommunityController::class, 'index'])->name('community');
 Route::get('/articles', [NewsController::class, 'AllArticles'])->name('AllArticles');
-Route::get('/articles/{id}-{name}', [NewsController::class, 'GetRecents'])->name('articles.show');
+Route::get('/articles/{id}-{name?}', [NewsController::class, 'GetRecents'])->name('articles.show');
 Route::post('/comments', [NewsController::class, 'storeComment'])->name('comments.store');
 Route::get('/community/gotw', [CommunityController::class, 'GOTW'])->name('gotw');
 Route::get('/community/leaderboards', [CommunityController::class, 'MostStuff'])->name('leaderboards');

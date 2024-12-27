@@ -41,8 +41,8 @@ class FortifyServiceProvider extends ServiceProvider
         $router->aliasMiddleware('banned', BannedMiddleware::class);
 
         Fortify::loginView(function () {
-            return view('welcome');
-        });
+            return redirect()->route('home'); // Redirects to the homepage instead of loading a login view
+}       );
 
         Fortify::registerView(function () {
             return view('auth.register');

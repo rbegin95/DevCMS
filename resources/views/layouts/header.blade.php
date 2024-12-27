@@ -56,6 +56,9 @@
                         <a href="{{ route('gotw') }}" class="dropdown-item {{ request()->routeIs('gotw') ? 'active' : '' }}">GOTW Leaderboards</a>
                         <a href="{{ route('leaderboards') }}" class="dropdown-item {{ request()->routeIs('leaderboards') ? 'active' : '' }}">Leaderboards</a>
                         <a href="{{ route('players') }}" class="dropdown-item {{ request()->routeIs('online-players') ? 'active' : '' }}">Online Players</a>
+                        @if($currentTheme === 'Christmas')
+                        <a href="{{ route('snowflake') }}" class="dropdown-item {{ request()->routeIs('snowflake') ? 'active' : '' }}">Snowflake Leaderboard</a>
+                        @endif
                         <a href="{{ route('staff') }}" class="dropdown-item {{ request()->routeIs('staff') ? 'active' : '' }}">Staff</a>
                     </div>
                 </li>

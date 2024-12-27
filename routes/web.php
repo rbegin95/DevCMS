@@ -10,8 +10,10 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StaffApplicationController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\LeaderBoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MarketplaceController;
+use App\Http\Controllers\ClientAutenticateController;
 use App\Http\Controllers\Account\AccountSettingsController;
 use App\Http\Controllers\Housekeeping\CreateArticlesController;
 use App\Http\Controllers\Housekeeping\DashboardController;
@@ -45,7 +47,7 @@ Route::middleware([
     'verified',
     'auth.session',
     'banned',
-    App\Http\Middleware\RedirectIfUnauthenticated::class, // Add your custom middleware here
+    'redirectUnauthenticated' // Add your custom middleware here
 ])->group(function () {
     Route::get('/me', [NewsController::class, 'dashboard'])->name('dashboard');
 });
@@ -74,7 +76,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 /* Nitro Client */
+
 Route::get('/client', NitroController::class)->name('nitro-client');
+Route::match(['get', 'post'], '/client/authenticate', [ClientAutenticateController::class, 'handle'])->name('client.authenticate');
+
 
 /* Community Pages */
 
@@ -82,10 +87,11 @@ Route::get('/community', [CommunityController::class, 'index'])->name('community
 Route::get('/articles', [NewsController::class, 'AllArticles'])->name('AllArticles');
 Route::get('/articles/{id}-{name?}', [NewsController::class, 'GetRecents'])->name('articles.show');
 Route::post('/comments', [NewsController::class, 'storeComment'])->name('comments.store');
-Route::get('/community/gotw', [CommunityController::class, 'GOTW'])->name('gotw');
-Route::get('/community/leaderboards', [CommunityController::class, 'MostStuff'])->name('leaderboards');
+Route::get('/community/gotw', [LeaderBoardController::class, 'GOTW'])->name('gotw');
+Route::get('/community/leaderboards', [LeaderBoardController::class, 'MostStuff'])->name('leaderboards');
 Route::get('/community/online-players', [UserController::class, 'onlinePlayers'])->name('players');
 Route::get('/community/staff', [StaffController::class, 'index'])->name('staff');
+Route::get('/community/snowflake', [LeaderBoardController::class, 'showSnowFlakes'])->name('snowflake');
 
 /* Photo Gallery */
 

@@ -3,68 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>Housekeeping</title>
 
-    <!-- Bootstrap 5.3.3 CSS -->
+    <!-- Bootstrap CSS (for styling, not collapse) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('/img/favicon-d.png') }}" type="image/vnd.microsoft.icon"/>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Summernote CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.min.css" rel="stylesheet">
-
-    <!-- CSS Styles -->
+    <!-- Custom CSS -->
     <style>
-        .sidebar {
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding-top: 20px;
-            background-color: #343a40;
-            color: white;
-        }
+    body {
+        font-family: "Ubuntu", sans-serif;
+    }
 
-        .content {
-            margin-left: 280px;
-            padding: 20px;
-        }
+    /* Sidebar styling */
+    .sidebar {
+        height: 100vh;
+        width: 280px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #343a40;
+        color: white;
+        padding: 20px;
+        overflow-y: auto;
+    }
 
-        .sidebar a {
-            color: white;
-        }
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        transition: background 0.3s ease;
+    }
 
-        .sidebar a:hover {
-            color: #adb5bd;
-        }
+    .sidebar a:hover {
+        background-color: #495057;
+    }
 
-        /* Collapsible menu styles with transition */
-        #hotelSubMenu, #websiteSubMenu, #adminSubMenu {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.0s ease, visibility 0.0s ease;
-        }
+    .content {
+        margin-left: 300px;
+        padding: 20px;
+    }
 
-        #hotelSubMenu.show, #websiteSubMenu.show, #adminSubMenu.show {
-            opacity: 1;
-            visibility: visible;
-        }
+    /* Custom Submenu Toggle */
+    .submenu {
+        list-style: none;
+        display: none;
+        transition: all 0.3s ease-in-out;
+        padding-left: 15px; /* General left padding for submenu */
+    }
 
-        .collapse.nav {
-            transition: all 0.0s ease;
-            overflow: hidden;
-        }
-    </style>
+    .submenu.open {
+        display: block;
+    }
+
+    /* Add right indentation to submenu items */
+    .submenu li a {
+        padding-left: 35px; /* Right indentation for better hierarchy */
+        font-size: 0.9rem; /* Optional: Smaller font for submenu items */
+    }
+
+    /* Caret rotation */
+    .toggle-caret {
+        transition: transform 0.3s ease;
+    }
+
+    .rotate {
+        transform: rotate(90deg);
+    }
+</style>
 </head>
 <body>
+    <!-- Header -->
     <header class="p-3 mb-3 border-bottom">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-between">
@@ -88,234 +104,105 @@
         </div>
     </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar p-3">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-            <span class="fs-4">Housekeeping</span>
-        </a>
-        <br />
+            <!-- Sidebar -->
+<div class="sidebar p-3">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+        <span class="fs-4">Housekeeping</span>
+    </a>
+    <br />
 
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="{{ route('housekeeping.dashboard') }}" class="nav-link {{ request()->routeIs('housekeeping.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
-                </a>
-            </li>
-    
-            <!-- Hotel Collapsible Menu -->
-            <li class="nav-item">
-                <a href="#hotelSubMenu" class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">
-                    <span>
-                        <i class="bi bi-server me-2"></i> Hotel
-                    </span>
-                    <i class="bi bi-caret-right" id="hotelCaret"></i>
-                </a>
-                <ul class="collapse nav flex-column ms-3" id="hotelSubMenu">
-                    
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.hotel.badges') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.badges') ? 'active' : '' }}">
-                            Badges
-                        </a>
-                    </li>
-                    <li>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <!-- Dashboard -->
+        <li class="nav-item">
+            <a href="{{ route('housekeeping.dashboard') }}" class="nav-link {{ request()->routeIs('housekeeping.dashboard') ? 'active' : '' }}">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+        </li>
 
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.users.bannedusers') }}" class="nav-link {{ request()->routeIs('housekeeping.users.bannedusers') ? 'active' : '' }}">
-                            Bans
-                        </a>
-                    </li>
-                    <li>
+        <!-- Hotel Menu -->
+        <li class="nav-item">
+            <a href="#" class="nav-link d-flex justify-content-between align-items-center toggle-link">
+                <span><i class="bi bi-server me-2"></i> Hotel</span>
+                <i class="bi bi-caret-right toggle-caret"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="{{ route('housekeeping.hotel.badges') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.badges') ? 'active' : '' }}">Badges</a></li>
+                <li><a href="{{ route('housekeeping.users.bannedusers') }}" class="nav-link {{ request()->routeIs('housekeeping.users.bannedusers') ? 'active' : '' }}">Bans</a></li>
+                <li><a href="{{ route('housekeeping.users.index') }}" class="nav-link {{ request()->routeIs('housekeeping.users.index') ? 'active' : '' }}">Users</a></li>
+                <li><a href="{{ route('housekeeping.hotel.roomchatlogs') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.roomchatlogs') ? 'active' : '' }}">Room Chatlogs</a></li>
+                <li><a href="{{ route('housekeeping.permissions.index') }}" class="nav-link {{ request()->routeIs('housekeeping.permissions.index') ? 'active' : '' }}">Permissions</a></li>
+                <li><a href="{{ route('housekeeping.hotel.privatechatlogs') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.privatechatlogs') ? 'active' : '' }}">Private Chatlogs</a></li>
+                <li><a href="{{ route('housekeeping.hotel.alert') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.alert') ? 'active' : '' }}">Hotel Alert</a></li>
+                <li><a href="{{ route('housekeeping.hotel.wordfilter') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.wordfilter') ? 'active' : '' }}">Word Filters</a></li>
+            </ul>
+        </li>
 
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.users.index') }}" class="nav-link {{ request()->routeIs('housekeeping.users.index') ? 'active' : '' }}">
-                            Users
-                        </a>
-                    </li>
-                    <li>
-                <a href="{{ route('housekeeping.hotel.roomchatlogs') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.roomchatlogs') ? 'active' : '' }}">
-                     Room Chatlogs
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('housekeeping.permissions.index') }}" class="nav-link {{ request()->routeIs('housekeeping.permissions.index') ? 'active' : '' }}">
-                     Permissions
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('housekeeping.hotel.privatechatlogs') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.privatechatlogs') ? 'active' : '' }}">
-                     Private Chatlogs
-                </a>
-            </li>
+        <!-- Website Menu -->
+        <li class="nav-item">
+            <a href="#" class="nav-link d-flex justify-content-between align-items-center toggle-link">
+                <span><i class="bi bi-globe me-2"></i> Website</span>
+                <i class="bi bi-caret-right toggle-caret"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="{{ route('housekeeping.support.siteticket') }}" class="nav-link {{ request()->routeIs('housekeeping.support.siteticket') ? 'active' : '' }}">Tickets</a></li>
+                <li><a href="{{ route('housekeeping.articles.create') }}" class="nav-link {{ request()->routeIs('housekeeping.articles.create') ? 'active' : '' }}">Articles</a></li>
+                <li><a href="{{ route('housekeeping.camera.cameraweb') }}" class="nav-link {{ request()->routeIs('housekeeping.camera.cameraweb') ? 'active' : '' }}">Camera Web</a></li>
+            </ul>
+        </li>
 
-                     <li>
-                <a href="{{ route('housekeeping.hotel.alert') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.alert') ? 'active' : '' }}">
-                     Hotel Alert
-                </a>
-            </li>
-             <li>
-                <a href="{{ route('housekeeping.hotel.wordfilter') }}" class="nav-link {{ request()->routeIs('housekeeping.hotel.wordfilter') ? 'active' : '' }}">
-                     Word Filters
-                </a>
-            </li>
-                </ul>
-            </li>
+        <!-- Catalogue Menu -->
+        <li class="nav-item">
+            <a href="#" class="nav-link d-flex justify-content-between align-items-center toggle-link">
+                <span><i class="bi bi-bag me-2"></i> Catalogue</span>
+                <i class="bi bi-caret-right toggle-caret"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="#" class="nav-link">Catalogue Pages</a></li>
+                <li><a href="#" class="nav-link">Catalogue Items</a></li>
+            </ul>
+        </li>
 
-            <!-- Website Collapsible Menu -->
-            <li class="nav-item">
-                <a href="#websiteSubMenu" class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">
-                    <span>
-                        <i class="bi bi-globe me-2"></i> Website
-                    </span>
-                    <i class="bi bi-caret-right" id="websiteCaret"></i>
-                </a>
-                <ul class="collapse nav flex-column ms-3" id="websiteSubMenu">
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.support.siteticket') }}" class="nav-link {{ request()->routeIs('housekeeping.support.siteticket') ? 'active' : '' }}">
-                            Website Tickets
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.articles.create') }}" class="nav-link {{ request()->routeIs('housekeeping.articles.create') ? 'active' : '' }}">
-                            Website Article
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.camera.cameraweb') }}" class="nav-link {{ request()->routeIs('housekeeping.camera.cameraweb') ? 'active' : '' }}">
-                           Camera Web
-                        </a>
-                    </li>
-                </ul>
-            </li>
+        <!-- Admin Menu -->
+        @if (Auth::check() && Auth::user()->rank >= 7)
+        <li class="nav-item">
+            <a href="#" class="nav-link d-flex justify-content-between align-items-center toggle-link">
+                <span><i class="bi bi-person-badge"></i> Admin</span>
+                <i class="bi bi-caret-right toggle-caret"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="{{ route('housekeeping.admin.activitylogs') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.activitylogs') ? 'active' : '' }}">Activity Logs</a></li>
+                <li><a href="{{ route('housekeeping.admin.sitesettings') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.sitesettings') ? 'active' : '' }}">Website Settings</a></li>
+                <li><a href="{{ route('housekeeping.admin.staffapps') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.staffapps') ? 'active' : '' }}">Staff Applications</a></li>
+                <li><a href="{{ route('housekeeping.admin.passwordrestore') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.passwordrestore') ? 'active' : '' }}">Password Restore Tool</a></li>
+            </ul>
+        </li>
+        @endif
+    </ul>
+</div>
 
-            <!-- Catalogue Section -->
-            <li class="nav-item">
-                <a href="#catalogSubMenu" class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">
-                    <span>
-                        <i class="bi bi-bag fill"></i> Catalogue
-                    </span>
-                    <i class="bi bi-caret-right" id="catalogCaret"></i>
-                </a>
-                <ul class="collapse nav flex-column ms-3" id="catalogSubMenu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                           Catalogue Pages
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Catalogue Items
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- Admin Section -->
-            @if (Auth::check() && Auth::user()->rank >= 7)
-            <li class="nav-item">
-                <a href="#adminSubMenu" class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">
-                    <span>
-                        <i class="bi bi-person-badge"></i> Admin
-                    </span>
-                    <i class="bi bi-caret-right" id="adminCaret"></i>
-                </a>
-                <ul class="collapse nav flex-column ms-3" id="adminSubMenu">
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.admin.activitylogs') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.activitylogs') ? 'active' : '' }}">
-                            Acitivity Logs
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('housekeeping.admin.sitesettings') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.sitesettings') ? 'active' : '' }}">
-                            Website Settings
-                        </a>
-                    </li>
-                     <li>
-                <a href="{{ route('housekeeping.admin.staffapps')}}" class="nav-link {{ request()->routeIs('housekeeping.admin.staffapps') ? 'active' : '' }}">
-                            Staff Applications
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('housekeeping.admin.passwordrestore') }}" class="nav-link {{ request()->routeIs('housekeeping.admin.passwordrestore') ? 'active' : '' }}">
-        Password Restore Tool
-                    </a>
-                    </li>
-                </ul>
-            </li>
-            @endif
-    </div>
 
     <!-- Content -->
     <div class="content">
         @yield('content')
     </div>
 
-
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.min.js"></script>
-
-     @yield('scripts')
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var hotelSubMenu = document.getElementById('hotelSubMenu');
-            var hotelCaret = document.getElementById('hotelCaret');
-    
-            var websiteSubMenu = document.getElementById('websiteSubMenu');
-            var websiteCaret = document.getElementById('websiteCaret');
-    
-            var adminSubMenu = document.getElementById('adminSubMenu');
-            var adminCaret = document.getElementById('adminCaret');
+            const toggles = document.querySelectorAll('.toggle-link');
 
-            var catalogSubMenu = document.getElementById('catalogSubMenu');
-            var catalogCaret = document.getElementById('catalogCaret');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const submenu = this.nextElementSibling;
+                    const caret = this.querySelector('.toggle-caret');
 
-            // Hotel Menu
-            hotelSubMenu.addEventListener('show.bs.collapse', function () {
-                hotelCaret.classList.remove('bi-caret-right');
-                hotelCaret.classList.add('bi-caret-down');
-            });
+                    // Toggle submenu visibility
+                    submenu.classList.toggle('open');
 
-            hotelSubMenu.addEventListener('hide.bs.collapse', function () {
-                hotelCaret.classList.remove('bi-caret-down');
-                hotelCaret.classList.add('bi-caret-right');
-            });
-
-            // Website Menu
-            websiteSubMenu.addEventListener('show.bs.collapse', function () {
-                websiteCaret.classList.remove('bi-caret-right');
-                websiteCaret.classList.add('bi-caret-down');
-            });
-
-            websiteSubMenu.addEventListener('hide.bs.collapse', function () {
-                websiteCaret.classList.remove('bi-caret-down');
-                websiteCaret.classList.add('bi-caret-right');
-            });
-
-            //Admin Menu
-
-            adminSubMenu.addEventListener('show.bs.collapse', function () {
-                adminCaret.classList.remove('bi-caret-right');
-                adminCaret.classList.add('bi-caret-down');
-            });
-
-            adminSubMenu.addEventListener('hide.bs.collapse', function () {
-                adminCaret.classList.remove('bi-caret-down');
-                adminCaret.classList.add('bi-caret-right');
-            });
-
-            //Catalogue Menu
-
-            catalogSubMenu.addEventListener('show.bs.collapse', function () {
-                catalogCaret.classList.remove('bi-caret-right');
-                catalogCaret.classList.add('bi-caret-down');
-            });
-
-            catalogSubMenu.addEventListener('hide.bs.collapse', function () {
-                catalogCaret.classList.remove('bi-caret-down');
-                catalogCaret.classList.add('bi-caret-right');
+                    // Rotate caret icon
+                    caret.classList.toggle('rotate');
+                });
             });
         });
     </script>

@@ -11,10 +11,8 @@ class RedirectIfAuthenticated
     {
         // Check if the user is authenticated
         if (Auth::check()) {
-            // Redirect to the dashboard if accessing the homepage or login page
-            if ($request->is('/')) {
-                return redirect('/dashboard');
-            }
+            // Redirect to '/me' for authenticated users
+            return redirect('/me');
         }
 
         return $next($request);

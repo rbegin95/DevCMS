@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Fortify\Fortify;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -21,9 +22,10 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->configurePermissions();
-
-        Jetstream::deleteUsersUsing(DeleteUser::class);
+       Fortify::loginView(function () {
+            // Redirect expired sessions to the homepage
+            return redirect()->route('home');
+        });
     }
 
     /**
@@ -31,13 +33,13 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configurePermissions(): void
     {
-        Jetstream::defaultApiTokenPermissions(['read']);
+        //Jetstream::defaultApiTokenPermissions(['read']);
 
-        Jetstream::permissions([
+        /*Jetstream::permissions([
             'create',
             'read',
             'update',
             'delete',
-        ]);
+        ]);*/
     }
 }

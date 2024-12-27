@@ -16,6 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+            'redirectUnauthenticated' => \App\Http\Middleware\RedirectIfUnauthenticated::class,
+            'redirectAuthenticated' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+            'reauthenticate' => App\Http\Middleware\ReAuthenticate::class,
+    
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

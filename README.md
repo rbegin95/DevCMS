@@ -139,6 +139,12 @@ MIT License. See [`LICENSE`](LICENSE) for details.
 
 ---
 
+## Live Demo
+
+[DevCMS](https://devcms.online/)
+
+---
+
 ## 👤 Maintainer
 
 - **Richard Begin** – [@chunk082](https://github.com/chunk082)

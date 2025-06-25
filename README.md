@@ -139,7 +139,7 @@ MIT License. See [`LICENSE`](LICENSE) for details.
 
 ---
 
-## Live Demo
+## ▶️ Live Demo
 
 [DevCMS](https://devcms.online/)
 
